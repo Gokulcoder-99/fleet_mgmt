@@ -1,6 +1,6 @@
 ## Fleet Mgmt
 
-to manage the vehicles
+Fleet management
 
 #### License
 

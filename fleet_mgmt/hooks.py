@@ -3,8 +3,8 @@ from . import __version__ as app_version
 app_name = "fleet_mgmt"
 app_title = "Fleet Mgmt"
 app_publisher = "gokul"
-app_description = "to manage the vehicles"
-app_email = "gokul@mail.com"
+app_description = "Fleet management"
+app_email = "gokul"
 app_license = "MIT"
 
 # Includes in <head>

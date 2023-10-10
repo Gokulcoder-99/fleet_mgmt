@@ -9,9 +9,9 @@ from fleet_mgmt import __version__ as version
 setup(
 	name="fleet_mgmt",
 	version=version,
-	description="to manage the vehicles",
+	description="Fleet management",
 	author="gokul",
-	author_email="gokul@mail.com",
+	author_email="gokul",
 	packages=find_packages(),
 	zip_safe=False,
 	include_package_data=True,
