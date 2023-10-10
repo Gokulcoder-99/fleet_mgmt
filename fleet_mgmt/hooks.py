@@ -2,9 +2,9 @@ from . import __version__ as app_version
 
 app_name = "fleet_mgmt"
 app_title = "Fleet Mgmt"
-app_publisher = "gokul"
-app_description = "fleet management"
-app_email = "go.kul.com"
+app_publisher = "Gokul"
+app_description = "Fleet management"
+app_email = "go.kul"
 app_license = "MIT"
 
 # Includes in <head>
