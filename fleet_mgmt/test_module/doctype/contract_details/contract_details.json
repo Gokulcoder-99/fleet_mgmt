@@ -1,0 +1,373 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:vehicle_no",
+ "creation": "2023-10-13 10:56:34.351283",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "vehicle_details_tab",
+  "vehicle_no",
+  "model",
+  "year",
+  "vehicle_identification_number_vin",
+  "vehicle_type",
+  "column_break_rqw3f",
+  "seating_capacity",
+  "fastag_wallet_id",
+  "rc_register_date",
+  "rc_expire_date",
+  "next_service_date",
+  "section_break_psztg",
+  "rc_details",
+  "pollution_certificate",
+  "road_tax",
+  "column_break_xz1im",
+  "purchase_invoice",
+  "bill_of_sale",
+  "insurance_details_tab",
+  "policy_number",
+  "policy_type",
+  "policyholder_name",
+  "policyholder_address",
+  "column_break_urzw2",
+  "premiums",
+  "premium_amt",
+  "policy_effective_date",
+  "policy_expiration_end",
+  "coverage_limits",
+  "section_break_capku",
+  "insurance_company_name",
+  "insurance_company_address",
+  "column_break_n7bce",
+  "deductibles",
+  "section_break_xowdf",
+  "insurance",
+  "contract_driver_tab",
+  "driver_name",
+  "temporary_employee_id",
+  "date_of_birth",
+  "mobile_no",
+  "column_break_p0svk",
+  "license_no",
+  "type_of_license",
+  "license_expiration_date",
+  "additional_phone_no",
+  "attach_section",
+  "license_copy",
+  "physical_test",
+  "column_break_rps2x",
+  "aadhar_card",
+  "drug_test"
+ ],
+ "fields": [
+  {
+   "fieldname": "vehicle_details_tab",
+   "fieldtype": "Tab Break",
+   "label": "Vehicle Details"
+  },
+  {
+   "fieldname": "vehicle_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "License plate number",
+   "unique": 1
+  },
+  {
+   "fieldname": "model",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Model"
+  },
+  {
+   "fieldname": "year",
+   "fieldtype": "Int",
+   "label": "Year"
+  },
+  {
+   "fieldname": "vehicle_identification_number_vin",
+   "fieldtype": "Data",
+   "label": "Vehicle identification number (VIN)"
+  },
+  {
+   "fieldname": "vehicle_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Vehicle Type",
+   "options": "\nTransport\nLogistics"
+  },
+  {
+   "fieldname": "column_break_rqw3f",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.vehicle_type == \"Transport\"",
+   "fieldname": "seating_capacity",
+   "fieldtype": "Int",
+   "label": "Seating Capacity"
+  },
+  {
+   "fieldname": "fastag_wallet_id",
+   "fieldtype": "Data",
+   "label": "FasTag Wallet ID"
+  },
+  {
+   "fieldname": "rc_register_date",
+   "fieldtype": "Date",
+   "label": "RC Register Date"
+  },
+  {
+   "fieldname": "rc_expire_date",
+   "fieldtype": "Date",
+   "label": "RC Expire Date"
+  },
+  {
+   "fieldname": "next_service_date",
+   "fieldtype": "Date",
+   "label": "Next Service Date"
+  },
+  {
+   "fieldname": "section_break_psztg",
+   "fieldtype": "Section Break",
+   "label": "Attach"
+  },
+  {
+   "fieldname": "rc_details",
+   "fieldtype": "Attach",
+   "label": "RC Details"
+  },
+  {
+   "fieldname": "pollution_certificate",
+   "fieldtype": "Attach",
+   "label": "Pollution Certificate"
+  },
+  {
+   "fieldname": "road_tax",
+   "fieldtype": "Attach",
+   "label": "Road tax"
+  },
+  {
+   "fieldname": "column_break_xz1im",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "purchase_invoice",
+   "fieldtype": "Attach",
+   "label": "Purchase Invoice"
+  },
+  {
+   "fieldname": "bill_of_sale",
+   "fieldtype": "Attach",
+   "label": "Bill Of Sale"
+  },
+  {
+   "fieldname": "insurance_details_tab",
+   "fieldtype": "Tab Break",
+   "label": "Insurance Details"
+  },
+  {
+   "fieldname": "policy_number",
+   "fieldtype": "Data",
+   "label": "Policy Number"
+  },
+  {
+   "fieldname": "policy_type",
+   "fieldtype": "Select",
+   "label": "Policy Type ",
+   "options": "\nGeneral\nTPRM"
+  },
+  {
+   "fieldname": "policyholder_name",
+   "fieldtype": "Data",
+   "label": "Policyholder Name "
+  },
+  {
+   "fieldname": "policyholder_address",
+   "fieldtype": "Long Text",
+   "label": "Policyholder Address"
+  },
+  {
+   "fieldname": "column_break_urzw2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "premiums",
+   "fieldtype": "Link",
+   "label": "Premiums",
+   "options": "Currency"
+  },
+  {
+   "fieldname": "premium_amt",
+   "fieldtype": "Currency",
+   "label": "Premium Amt",
+   "options": "premiums"
+  },
+  {
+   "fieldname": "policy_effective_date",
+   "fieldtype": "Date",
+   "label": "Policy Effective Date"
+  },
+  {
+   "fieldname": "policy_expiration_end",
+   "fieldtype": "Date",
+   "label": "Policy Expiration End"
+  },
+  {
+   "fieldname": "coverage_limits",
+   "fieldtype": "Long Text",
+   "label": "Coverage Limits"
+  },
+  {
+   "fieldname": "section_break_capku",
+   "fieldtype": "Section Break",
+   "label": "Company"
+  },
+  {
+   "fieldname": "insurance_company_name",
+   "fieldtype": "Data",
+   "label": "Insurance Company Name"
+  },
+  {
+   "fieldname": "insurance_company_address",
+   "fieldtype": "Long Text",
+   "label": "Insurance Company Address"
+  },
+  {
+   "fieldname": "column_break_n7bce",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "deductibles",
+   "fieldtype": "Long Text",
+   "label": "Deductibles"
+  },
+  {
+   "fieldname": "section_break_xowdf",
+   "fieldtype": "Section Break",
+   "label": "Attach"
+  },
+  {
+   "fieldname": "insurance",
+   "fieldtype": "Attach",
+   "label": "Insurance"
+  },
+  {
+   "fieldname": "contract_driver_tab",
+   "fieldtype": "Tab Break",
+   "label": "Contract Driver"
+  },
+  {
+   "fieldname": "driver_name",
+   "fieldtype": "Data",
+   "label": "Driver Name"
+  },
+  {
+   "fieldname": "temporary_employee_id",
+   "fieldtype": "Data",
+   "label": "Temporary Employee ID"
+  },
+  {
+   "fieldname": "date_of_birth",
+   "fieldtype": "Date",
+   "label": "Date Of Birth"
+  },
+  {
+   "fieldname": "mobile_no",
+   "fieldtype": "Phone",
+   "label": "Mobile No."
+  },
+  {
+   "fieldname": "column_break_p0svk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "license_no",
+   "fieldtype": "Data",
+   "label": "License No."
+  },
+  {
+   "fieldname": "type_of_license",
+   "fieldtype": "Data",
+   "label": "Type Of License"
+  },
+  {
+   "fieldname": "license_expiration_date",
+   "fieldtype": "Data",
+   "label": "License Expiration Date"
+  },
+  {
+   "fieldname": "additional_phone_no",
+   "fieldtype": "Phone",
+   "label": "Additional Phone No."
+  },
+  {
+   "fieldname": "attach_section",
+   "fieldtype": "Section Break",
+   "label": "Attach"
+  },
+  {
+   "fieldname": "license_copy",
+   "fieldtype": "Attach",
+   "label": "License Copy"
+  },
+  {
+   "fieldname": "physical_test",
+   "fieldtype": "Attach",
+   "label": "Physical Test"
+  },
+  {
+   "fieldname": "column_break_rps2x",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "aadhar_card",
+   "fieldtype": "Attach",
+   "label": "Aadhar Card"
+  },
+  {
+   "fieldname": "drug_test",
+   "fieldtype": "Attach",
+   "label": "Drug Test"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-10-13 10:56:34.351283",
+ "modified_by": "Administrator",
+ "module": "test module",
+ "name": "Contract Details",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Fleet Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}
