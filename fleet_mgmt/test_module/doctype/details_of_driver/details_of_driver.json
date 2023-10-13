@@ -1,0 +1,147 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:emp_id",
+ "creation": "2023-10-13 11:12:25.129740",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "emp_id",
+  "driver_name",
+  "date_of_birth",
+  "mobile_no",
+  "column_break_bbtjh",
+  "driving_license_no",
+  "type_of_license",
+  "license_expiration_date",
+  "emergency_contact_information",
+  "attach_section",
+  "driving_license_copy",
+  "aadhar_card",
+  "column_break_nvi2l",
+  "physical_test",
+  "drug_test"
+ ],
+ "fields": [
+  {
+   "fieldname": "emp_id",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Employee ID",
+   "options": "Employee",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "driver_name",
+   "fieldtype": "Data",
+   "label": "Driver Name",
+   "unique": 1
+  },
+  {
+   "fieldname": "date_of_birth",
+   "fieldtype": "Date",
+   "label": "Date Of Birth"
+  },
+  {
+   "fieldname": "mobile_no",
+   "fieldtype": "Phone",
+   "label": "Mobile No."
+  },
+  {
+   "fieldname": "column_break_bbtjh",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "driving_license_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "License No.",
+   "reqd": 1
+  },
+  {
+   "fieldname": "type_of_license",
+   "fieldtype": "Select",
+   "label": "Type Of License",
+   "options": "\nLMV\nHMV"
+  },
+  {
+   "fieldname": "license_expiration_date",
+   "fieldtype": "Date",
+   "label": "License Expiration Date"
+  },
+  {
+   "fieldname": "emergency_contact_information",
+   "fieldtype": "Int",
+   "label": "Emergency contact information"
+  },
+  {
+   "fieldname": "attach_section",
+   "fieldtype": "Section Break",
+   "label": "Attach"
+  },
+  {
+   "fieldname": "driving_license_copy",
+   "fieldtype": "Attach",
+   "label": "License Copy"
+  },
+  {
+   "fieldname": "aadhar_card",
+   "fieldtype": "Attach",
+   "label": "Aadhar Card"
+  },
+  {
+   "fieldname": "column_break_nvi2l",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "physical_test",
+   "fieldtype": "Attach",
+   "label": "Physical Test"
+  },
+  {
+   "fieldname": "drug_test",
+   "fieldtype": "Attach",
+   "label": "Drug Test"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-10-13 11:12:25.129740",
+ "modified_by": "Administrator",
+ "module": "test module",
+ "name": "Details_Of_Driver",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Fleet Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

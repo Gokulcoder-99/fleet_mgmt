@@ -1,0 +1,288 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:vehicle_no",
+ "creation": "2023-10-13 11:13:41.267818",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "vehicle_details_tab",
+  "vehicle_no",
+  "model",
+  "year",
+  "vehicle_identification_number_vin",
+  "vehicle_type",
+  "column_break_rqw3f",
+  "seating_capacity",
+  "type_of_ownership",
+  "fastag_wallet_id",
+  "rc_register_date",
+  "rc_expire_date",
+  "next_service_date",
+  "section_break_psztg",
+  "rc_details",
+  "pollution_certificate",
+  "road_tax",
+  "column_break_xz1im",
+  "purchase_invoice",
+  "bill_of_sale",
+  "insurance_details_tab",
+  "policy_number",
+  "policy_type",
+  "policyholder_name",
+  "policyholder_address",
+  "column_break_urzw2",
+  "premiums",
+  "premium",
+  "policy_effective_date",
+  "policy_expiration_end",
+  "coverage_limits",
+  "section_break_capku",
+  "insurance_company_name",
+  "insurance_company_address",
+  "column_break_n7bce",
+  "deductibles",
+  "section_break_xowdf",
+  "insurance"
+ ],
+ "fields": [
+  {
+   "fieldname": "vehicle_details_tab",
+   "fieldtype": "Tab Break",
+   "label": "Vehicle Details"
+  },
+  {
+   "fieldname": "vehicle_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "License plate number",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "model",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Model",
+   "reqd": 1
+  },
+  {
+   "fieldname": "year",
+   "fieldtype": "Int",
+   "label": "Year"
+  },
+  {
+   "fieldname": "vehicle_identification_number_vin",
+   "fieldtype": "Data",
+   "label": "Vehicle identification number (VIN)"
+  },
+  {
+   "fieldname": "vehicle_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Vehicle Type",
+   "options": "\nTransport\nLogistics"
+  },
+  {
+   "fieldname": "column_break_rqw3f",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.vehicle_type == \"Transport\"",
+   "fieldname": "seating_capacity",
+   "fieldtype": "Int",
+   "label": "Seating Capacity"
+  },
+  {
+   "fieldname": "type_of_ownership",
+   "fieldtype": "Select",
+   "label": "Type Of Ownership",
+   "options": "\nOwn\nRental"
+  },
+  {
+   "fieldname": "fastag_wallet_id",
+   "fieldtype": "Data",
+   "label": "FasTag Wallet ID"
+  },
+  {
+   "fieldname": "rc_register_date",
+   "fieldtype": "Date",
+   "label": "RC Register Date"
+  },
+  {
+   "fieldname": "rc_expire_date",
+   "fieldtype": "Date",
+   "label": "RC Expire Date"
+  },
+  {
+   "fieldname": "next_service_date",
+   "fieldtype": "Date",
+   "label": "Next Service Date"
+  },
+  {
+   "fieldname": "section_break_psztg",
+   "fieldtype": "Section Break",
+   "label": "Attach"
+  },
+  {
+   "fieldname": "rc_details",
+   "fieldtype": "Attach",
+   "label": "RC Details"
+  },
+  {
+   "fieldname": "pollution_certificate",
+   "fieldtype": "Attach",
+   "label": "Pollution Certificate"
+  },
+  {
+   "fieldname": "road_tax",
+   "fieldtype": "Attach",
+   "label": "Road tax"
+  },
+  {
+   "fieldname": "column_break_xz1im",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "purchase_invoice",
+   "fieldtype": "Attach",
+   "label": "Purchase Invoice"
+  },
+  {
+   "fieldname": "bill_of_sale",
+   "fieldtype": "Attach",
+   "label": "Bill Of Sale"
+  },
+  {
+   "fieldname": "insurance_details_tab",
+   "fieldtype": "Tab Break",
+   "label": "Insurance Details"
+  },
+  {
+   "fieldname": "policy_number",
+   "fieldtype": "Data",
+   "label": "Policy Number"
+  },
+  {
+   "fieldname": "policy_type",
+   "fieldtype": "Select",
+   "label": "Policy Type ",
+   "options": "\nGeneral\nTPRM policy"
+  },
+  {
+   "fieldname": "policyholder_name",
+   "fieldtype": "Data",
+   "label": "Policyholder Name "
+  },
+  {
+   "fieldname": "policyholder_address",
+   "fieldtype": "Long Text",
+   "label": "Policyholder Address"
+  },
+  {
+   "fieldname": "column_break_urzw2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "premiums",
+   "fieldtype": "Link",
+   "label": "Premium",
+   "options": "Currency"
+  },
+  {
+   "fieldname": "premium",
+   "fieldtype": "Currency",
+   "label": "Premium Amt",
+   "options": "premiums"
+  },
+  {
+   "fieldname": "policy_effective_date",
+   "fieldtype": "Date",
+   "label": "Policy Effective Date"
+  },
+  {
+   "fieldname": "policy_expiration_end",
+   "fieldtype": "Date",
+   "label": "Policy Expiration End"
+  },
+  {
+   "fieldname": "coverage_limits",
+   "fieldtype": "Long Text",
+   "label": "Coverage Limits"
+  },
+  {
+   "fieldname": "section_break_capku",
+   "fieldtype": "Section Break",
+   "label": "Company"
+  },
+  {
+   "fieldname": "insurance_company_name",
+   "fieldtype": "Data",
+   "label": "Insurance Company Name"
+  },
+  {
+   "fieldname": "insurance_company_address",
+   "fieldtype": "Long Text",
+   "label": "Insurance Company Address"
+  },
+  {
+   "fieldname": "column_break_n7bce",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "deductibles",
+   "fieldtype": "Long Text",
+   "label": "Deductibles"
+  },
+  {
+   "fieldname": "section_break_xowdf",
+   "fieldtype": "Section Break",
+   "label": "Attach"
+  },
+  {
+   "fieldname": "insurance",
+   "fieldtype": "Attach",
+   "label": "Insurance"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-10-13 11:13:41.267818",
+ "modified_by": "Administrator",
+ "module": "test module",
+ "name": "Details_Of_Vehicles",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Fleet Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

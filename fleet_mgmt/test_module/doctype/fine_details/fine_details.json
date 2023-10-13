@@ -1,0 +1,234 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-10-13 11:07:11.273687",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "driver_details_tab",
+  "driver_name",
+  "employee_id",
+  "column_break_wufiy",
+  "mobile_no",
+  "driving_license_no",
+  "attach_section",
+  "driving_license_copy",
+  "column_break_qpfwp",
+  "aadhar_card",
+  "vehicle_details_tab",
+  "vehicle_no",
+  "model",
+  "column_break_7bjz2",
+  "vehicle_type",
+  "section_break_wjfrj",
+  "rc_details",
+  "column_break_iywth",
+  "insurance",
+  "accident_details_tab",
+  "fine_date",
+  "column_break_uis5u",
+  "location",
+  "section_break_cqnnj",
+  "brief_description_of_the_fine",
+  "section_break_9rmxm",
+  "police_report_number",
+  "column_break_0sbil",
+  "contact_information_for_witnesses"
+ ],
+ "fields": [
+  {
+   "fieldname": "driver_details_tab",
+   "fieldtype": "Tab Break",
+   "label": "Driver Details"
+  },
+  {
+   "fieldname": "driver_name",
+   "fieldtype": "Link",
+   "label": "Driver Name",
+   "options": "Details_Of_Driver"
+  },
+  {
+   "fetch_from": "driver_name.emp_id",
+   "fieldname": "employee_id",
+   "fieldtype": "Data",
+   "label": "Employee ID"
+  },
+  {
+   "fieldname": "column_break_wufiy",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "driver_name.mobile_no",
+   "fieldname": "mobile_no",
+   "fieldtype": "Phone",
+   "label": "Mobile No."
+  },
+  {
+   "fetch_from": "driver_name.dl_no",
+   "fieldname": "driving_license_no",
+   "fieldtype": "Data",
+   "label": "Driving License No."
+  },
+  {
+   "fieldname": "attach_section",
+   "fieldtype": "Section Break",
+   "label": "Attach"
+  },
+  {
+   "fetch_from": "driver_name.dl_image",
+   "fieldname": "driving_license_copy",
+   "fieldtype": "Attach",
+   "label": "Driving License Copy"
+  },
+  {
+   "fieldname": "column_break_qpfwp",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "driver_name.aadhar_card",
+   "fieldname": "aadhar_card",
+   "fieldtype": "Attach",
+   "label": "Aadhar Card"
+  },
+  {
+   "fieldname": "vehicle_details_tab",
+   "fieldtype": "Tab Break",
+   "label": "Vehicle Details"
+  },
+  {
+   "fieldname": "vehicle_no",
+   "fieldtype": "Link",
+   "label": "Vehicle No",
+   "options": "Details_Of_Vehicles"
+  },
+  {
+   "fetch_from": "vehicle_no.model",
+   "fieldname": "model",
+   "fieldtype": "Data",
+   "label": "Model"
+  },
+  {
+   "fieldname": "column_break_7bjz2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "vehicle_no.vehicle_type",
+   "fieldname": "vehicle_type",
+   "fieldtype": "Select",
+   "label": "Vehicle Type",
+   "options": "\nTransport\nLogistic"
+  },
+  {
+   "fieldname": "section_break_wjfrj",
+   "fieldtype": "Section Break",
+   "label": "Attach"
+  },
+  {
+   "fetch_from": "vehicle_no.rc_details",
+   "fieldname": "rc_details",
+   "fieldtype": "Attach",
+   "label": "RC Details"
+  },
+  {
+   "fieldname": "column_break_iywth",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fetch_from": "vehicle_no.insurance",
+   "fieldname": "insurance",
+   "fieldtype": "Check",
+   "label": "Insurance"
+  },
+  {
+   "fieldname": "accident_details_tab",
+   "fieldtype": "Tab Break",
+   "label": "Fine Details"
+  },
+  {
+   "fieldname": "fine_date",
+   "fieldtype": "Date",
+   "label": "Fine Date"
+  },
+  {
+   "fieldname": "column_break_uis5u",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "location",
+   "fieldtype": "Data",
+   "label": "Location"
+  },
+  {
+   "fieldname": "section_break_cqnnj",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "brief_description_of_the_fine",
+   "fieldtype": "Table MultiSelect",
+   "label": "Brief description of the Fine",
+   "options": "Fine_Type_Selector"
+  },
+  {
+   "fieldname": "section_break_9rmxm",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "police_report_number",
+   "fieldtype": "Data",
+   "label": "Police report number"
+  },
+  {
+   "fieldname": "column_break_0sbil",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "contact_information_for_witnesses",
+   "fieldtype": "Attach",
+   "label": "Fine Bill"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [
+  {
+   "link_doctype": "Details of New Driver",
+   "link_fieldname": "emp_id"
+  }
+ ],
+ "modified": "2023-10-13 11:20:51.061952",
+ "modified_by": "Administrator",
+ "module": "test module",
+ "name": "Fine_details",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Fleet Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
