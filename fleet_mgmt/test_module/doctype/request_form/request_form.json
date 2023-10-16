@@ -16,7 +16,8 @@
   "to",
   "approval_status",
   "column_break_u9eaq",
-  "route_details"
+  "route_details",
+  "amended_from"
  ],
  "fields": [
   {
@@ -42,8 +43,7 @@
    "depends_on": "eval:doc.request_type == \"Passenger\"",
    "fieldname": "pickup_point",
    "fieldtype": "Select",
-   "label": "Pickup Point",
-   "options": "taramani\nthaiyur"
+   "label": "Pickup Point"
   },
   {
    "depends_on": "eval:doc.request_type == \"Logistics\"",
@@ -75,12 +75,21 @@
    "fieldtype": "Text",
    "label": "Route Details",
    "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Request_Form",
+   "print_hide": 1,
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-10-13 11:28:04.901503",
+ "modified": "2023-10-13 13:38:16.872713",
  "modified_by": "Administrator",
  "module": "test module",
  "name": "Request_Form",
