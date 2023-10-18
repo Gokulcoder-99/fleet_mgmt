@@ -1,0 +1,23 @@
+{
+ "content": null,
+ "creation": "2023-10-16 12:17:43.936791",
+ "docstatus": 0,
+ "doctype": "Page",
+ "idx": 0,
+ "modified": "2023-10-16 12:17:43.936791",
+ "modified_by": "Administrator",
+ "module": "test module",
+ "name": "admin",
+ "owner": "Administrator",
+ "page_name": "admin",
+ "roles": [
+  {
+   "role": "Fleet Manager"
+  }
+ ],
+ "script": null,
+ "standard": "Yes",
+ "style": null,
+ "system_page": 0,
+ "title": "Fleet Management"
+}

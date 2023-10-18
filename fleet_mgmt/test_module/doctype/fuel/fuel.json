@@ -1,0 +1,120 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:vehicle_no",
+ "creation": "2023-10-17 15:40:17.991753",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "vehicle_no",
+  "current_odometer_reading",
+  "column_break_mlyal",
+  "amount",
+  "receipt_copy",
+  "supplier_section",
+  "supplier_name",
+  "date",
+  "column_break_m6hho",
+  "fuel_in_litres",
+  "litre_price"
+ ],
+ "fields": [
+  {
+   "fieldname": "vehicle_no",
+   "fieldtype": "Data",
+   "label": "Vehicle No",
+   "unique": 1
+  },
+  {
+   "fieldname": "current_odometer_reading",
+   "fieldtype": "Int",
+   "label": "Current Odometer Reading"
+  },
+  {
+   "fieldname": "column_break_mlyal",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Amount"
+  },
+  {
+   "fieldname": "receipt_copy",
+   "fieldtype": "Attach",
+   "label": "Receipt Copy"
+  },
+  {
+   "fieldname": "supplier_section",
+   "fieldtype": "Section Break",
+   "label": "Supplier"
+  },
+  {
+   "fieldname": "supplier_name",
+   "fieldtype": "Data",
+   "label": "Supplier Name"
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Date"
+  },
+  {
+   "fieldname": "column_break_m6hho",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "fuel_in_litres",
+   "fieldtype": "Int",
+   "label": "Fuel in litres"
+  },
+  {
+   "fieldname": "litre_price",
+   "fieldtype": "Int",
+   "label": "Litre Price"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-10-17 15:42:01.696641",
+ "modified_by": "Administrator",
+ "module": "test module",
+ "name": "fuel",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Fleet Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}
