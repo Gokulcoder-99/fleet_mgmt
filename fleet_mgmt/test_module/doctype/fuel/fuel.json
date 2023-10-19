@@ -1,13 +1,14 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "field:vehicle_no",
+ "autoname": "naming_series:",
  "creation": "2023-10-17 15:40:17.991753",
  "default_view": "List",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "naming_series",
   "vehicle_no",
   "current_odometer_reading",
   "column_break_mlyal",
@@ -24,8 +25,7 @@
   {
    "fieldname": "vehicle_no",
    "fieldtype": "Data",
-   "label": "Vehicle No",
-   "unique": 1
+   "label": "Vehicle No"
   },
   {
    "fieldname": "current_odometer_reading",
@@ -77,15 +77,21 @@
    "fieldname": "litre_price",
    "fieldtype": "Int",
    "label": "Litre Price"
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "series",
+   "options": "FL-"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-17 15:42:01.696641",
+ "modified": "2023-10-19 15:07:18.350272",
  "modified_by": "Administrator",
  "module": "test module",
  "name": "fuel",
- "naming_rule": "By fieldname",
+ "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [
   {
