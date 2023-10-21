@@ -191,12 +191,12 @@
                       datasets: [
                         {
                           label: 'Fuel in Litres',
-                          data: amounts, 
+                          data: fuels, 
                           backgroundColor: 'gray'
                         },
                         {
-                          label: 'Odo in Km',
-                          data: fuels,
+                          label: 'Odo in x100 Km',
+                          data: odoReading,
                           backgroundColor: 'black'
                         }
                       ]
@@ -226,7 +226,7 @@
                         },
                         {
                           label: 'Fine amount',
-                          data: fuels,
+                          data: fineAmount,
                           backgroundColor: 'green'
                         }
                       ]
@@ -270,7 +270,6 @@
                   const itemDate = new Date(item.date); // Assuming 'date' is a property in your data
                   return itemDate >= oneWeekAgo && itemDate <= today;
                 });
-                console.log(filteredData)
                 const vehicleTotals = {};
                 let weeklyLabel=[]
                 filteredData.forEach(entry => {
@@ -295,23 +294,29 @@
                 });
                 ////////////////////////////////////////////////////////////////////////////////////////
                 const filteredData1 = data1.filter(item=>{
-                  const itemDate = new Date(item.date); // Assuming 'date' is a property in your data
+                  const itemDate = new Date(item.fine_date); // Assuming 'date' is a property in your data
                   return itemDate >= oneWeekAgo && itemDate <= today;
                 })
                 filteredData1.forEach(entry => {
+                  const vehicleNo = entry.vehicle_no;
                   const fine_amount = entry.fine_amount;
+                  console.log("fine",fine_amount)
+                  if (vehicleTotals[vehicleNo]) {
                   vehicleTotals[vehicleNo].total_fine_amount += fine_amount;
-                    
+                  }
                 });
+                ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 const amounts = weeklyLabel.map(i=>vehicleTotals[i].total_amount);
                 const fuels = weeklyLabel.map(i=>vehicleTotals[i].total_fuel_in_litres)
-                console.log(amounts)
+                const fineAmount = weeklyLabel.map(i=>vehicleTotals[i].total_fine_amount)
+                const odoReading = weeklyLabel.map(i=>vehicleTotals[i].total_odo_reading/100)
+                console.log("fine amount",fineAmount)
 
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
                 chart1(weeklyLabel);
                 chart2(weeklyLabel)
-
+////////////////////////////////////////////////////////////////////////////////////////////
                   
 
 
@@ -352,6 +357,7 @@
                   const dayend = selectedEndDate1.getDate().toString().padStart(2, '0');
 
                   const selectedEndDate = `${yearend}-${monthend}-${dayend}`;
+                  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                   const filteredData = data.filter(item => {
                   const itemDate = item.date; 
                   return (
@@ -361,26 +367,52 @@
                   const vehicleTotals = {};
                 let yearlyLabel=[]
                 filteredData.forEach(entry => {
-                    const vehicleNo = entry.vehicle_no;
+                  const vehicleNo = entry.vehicle_no;
                     const amount = entry.amount;
+                    const odo = entry.current_odometer_reading;
                     const fuelInLitres = entry.fuel_in_litres;
 
                     if (!vehicleTotals[vehicleNo]) {
                         yearlyLabel.push(vehicleNo)
                         vehicleTotals[vehicleNo] = {
+                            total_fine_amount:0,
+                            total_odo_reading:odo,
                             total_amount: amount,
                             total_fuel_in_litres: fuelInLitres,
                         };
                     } else {
                         vehicleTotals[vehicleNo].total_amount += amount;
+                        vehicleTotals[vehicleNo].total_odo_reading += odo;
                         vehicleTotals[vehicleNo].total_fuel_in_litres += fuelInLitres;
                     }
                 });
+                /////////////////////////////////////////////////////////////////////////////////
+                const filteredData1 = data1.filter(item=>{
+                  const itemDate = new Date(item.fine_date); // Assuming 'date' is a property in your data
+                  return (
+                    itemDate >= selectedStartDate && itemDate <= selectedEndDate
+                  );
+                })
+                filteredData1.forEach(entry => {
+                  const vehicleNo = entry.vehicle_no;
+                  const fine_amount = entry.fine_amount;
+                  console.log("fine",fine_amount)
+                  if (vehicleTotals[vehicleNo]) {
+                  vehicleTotals[vehicleNo].total_fine_amount += fine_amount;
+                  }
+                });
+
+
+                ///////////////////////////////////////////////////////////////////////
                 const amounts = yearlyLabel.map(i=>vehicleTotals[i].total_amount);
                 const fuels = yearlyLabel.map(i=>vehicleTotals[i].total_fuel_in_litres)
-                console.log(filteredData)
+                const fineAmount = yearlyLabel.map(i=>vehicleTotals[i].total_fine_amount)
+                const odoReading = yearlyLabel.map(i=>vehicleTotals[i].total_odo_reading/100)
+                ////////////////////////////////////////////////////////////////////////
+
                chart1(yearlyLabel)
                chart2(yearlyLabel)
+               //////////////////////////////////////////////////////////////////////
                 }else if(selectedFilterOption === 'day'){
                 const selectedDate = new Date(); // Replace with your selected date
                 const filteredData = data.filter(item => {
@@ -391,28 +423,53 @@
                     itemDate.getFullYear() === selectedDate.getFullYear()
                   );
                 });
-                console.log(filteredData)
+              //////////////////////////////////////////////////////////////////////////////////////
                 const vehicleTotals = {};
                 let dailyLabel=[]
+                /////////////////////////////////////////////////////////////////////////////////
                 filteredData.forEach(entry => {
                     const vehicleNo = entry.vehicle_no;
                     const amount = entry.amount;
+                    const odo = entry.current_odometer_reading;
                     const fuelInLitres = entry.fuel_in_litres;
 
                     if (!vehicleTotals[vehicleNo]) {
                         dailyLabel.push(vehicleNo)
                         vehicleTotals[vehicleNo] = {
+                            total_fine_amount:0,
+                            total_odo_reading:odo,
                             total_amount: amount,
                             total_fuel_in_litres: fuelInLitres,
                         };
                     } else {
                         vehicleTotals[vehicleNo].total_amount += amount;
+                        vehicleTotals[vehicleNo].total_odo_reading += odo;
                         vehicleTotals[vehicleNo].total_fuel_in_litres += fuelInLitres;
                     }
                 });
+                ////////////////////////////////////////////////////////////////////
+                const filteredData1 = data1.filter(item=>{
+                  const itemDate = new Date(item.fine_date); // Assuming 'date' is a property in your data
+                  return (
+                    itemDate.getDate() === selectedDate.getDate() &&
+                    itemDate.getMonth() === selectedDate.getMonth() &&
+                    itemDate.getFullYear() === selectedDate.getFullYear()
+                  );
+                })
+                filteredData1.forEach(entry => {
+                  const vehicleNo = entry.vehicle_no;
+                  const fine_amount = entry.fine_amount;
+                  console.log("fine",fine_amount)
+                  if (vehicleTotals[vehicleNo]) {
+                  vehicleTotals[vehicleNo].total_fine_amount += fine_amount;
+                  }
+                });
+                /////////////////////////////////////////////////////////////////////////
                 const amounts = dailyLabel.map(i=>vehicleTotals[i].total_amount);
                 const fuels = dailyLabel.map(i=>vehicleTotals[i].total_fuel_in_litres)
-                console.log(amounts)
+                const fineAmount = dailyLabel.map(i=>vehicleTotals[i].total_fine_amount)
+                const odoReading = dailyLabel.map(i=>vehicleTotals[i].total_odo_reading/100)
+              //////////////////////////////////////////////////////////////////////
                chart1(dailyLabel)
                chart2(dailyLabel)
                 
@@ -424,30 +481,54 @@
                   const itemDate = new Date(item.date); // Assuming 'date' is a property in your data
                   return itemDate >= oneWeekAgo && itemDate <= today;
                 });
-                console.log(filteredData)
+              
                 const vehicleTotals = {};
                 let weeklyLabel=[]
+                //////////////////////////////////////////////////////////////////////////////////////
                 filteredData.forEach(entry => {
-                    const vehicleNo = entry.vehicle_no;
+                  const vehicleNo = entry.vehicle_no;
                     const amount = entry.amount;
+                    const odo = entry.current_odometer_reading;
                     const fuelInLitres = entry.fuel_in_litres;
 
                     if (!vehicleTotals[vehicleNo]) {
                         weeklyLabel.push(vehicleNo)
                         vehicleTotals[vehicleNo] = {
+                            total_fine_amount:0,
+                            total_odo_reading:odo,
                             total_amount: amount,
                             total_fuel_in_litres: fuelInLitres,
                         };
                     } else {
                         vehicleTotals[vehicleNo].total_amount += amount;
+                        vehicleTotals[vehicleNo].total_odo_reading += odo;
                         vehicleTotals[vehicleNo].total_fuel_in_litres += fuelInLitres;
                     }
                 });
+                ////////////////////////////////////////////////////////////////////////////////////
+                const filteredData1 = data1.filter(item=>{
+                  const itemDate = new Date(item.fine_date); // Assuming 'date' is a property in your data
+                  return itemDate >= oneWeekAgo && itemDate <= today;
+                })
+                filteredData1.forEach(entry => {
+                  const vehicleNo = entry.vehicle_no;
+                  const fine_amount = entry.fine_amount;
+                  console.log("fine",fine_amount)
+                  if (vehicleTotals[vehicleNo]) {
+                  vehicleTotals[vehicleNo].total_fine_amount += fine_amount;
+                  }
+                });
+                ///////////////////////////////////////////////////////////////////////////////
+
                 const amounts = weeklyLabel.map(i=>vehicleTotals[i].total_amount);
                 const fuels = weeklyLabel.map(i=>vehicleTotals[i].total_fuel_in_litres)
-                console.log(amounts)
+                const fineAmount = weeklyLabel.map(i=>vehicleTotals[i].total_fine_amount)
+                const odoReading = weeklyLabel.map(i=>vehicleTotals[i].total_odo_reading/100)
+                //////////////////////////////////////////////////////////////////////
+
                chart1(weeklyLabel)
                chart2(weeklyLabel)
+               ///////////////////////////////////////////////////////////////////
               }else if(selectedFilterOption === 'month'){
                 const today = new Date(); // Current date
                 const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
@@ -458,27 +539,50 @@
                 });
                 const vehicleTotals = {};
                 let monthlyLabel=[]
+                ////////////////////////////////////////////////////////////////////////////////////
                 filteredData.forEach(entry => {
                     const vehicleNo = entry.vehicle_no;
                     const amount = entry.amount;
+                    const odo = entry.current_odometer_reading;
                     const fuelInLitres = entry.fuel_in_litres;
 
                     if (!vehicleTotals[vehicleNo]) {
                         monthlyLabel.push(vehicleNo)
                         vehicleTotals[vehicleNo] = {
+                            total_fine_amount:0,
+                            total_odo_reading:odo,
                             total_amount: amount,
                             total_fuel_in_litres: fuelInLitres,
                         };
                     } else {
                         vehicleTotals[vehicleNo].total_amount += amount;
+                        vehicleTotals[vehicleNo].total_odo_reading += odo;
                         vehicleTotals[vehicleNo].total_fuel_in_litres += fuelInLitres;
                     }
                 });
+                //////////////////////////////////////////////////////////////////////////////
+                const filteredData1 = data1.filter(item=>{
+                  const itemDate = new Date(item.fine_date); // Assuming 'date' is a property in your data
+                  return itemDate >= startOfMonth && itemDate <= endOfMonth;
+                })
+                filteredData1.forEach(entry => {
+                  const vehicleNo = entry.vehicle_no;
+                  const fine_amount = entry.fine_amount;
+                  console.log("fine",fine_amount)
+                  if (vehicleTotals[vehicleNo]) {
+                  vehicleTotals[vehicleNo].total_fine_amount += fine_amount;
+                  }
+                });
+
+                ////////////////////////////////////////////////////////////////////////////////
                 const amounts = monthlyLabel.map(i=>vehicleTotals[i].total_amount);
                 const fuels = monthlyLabel.map(i=>vehicleTotals[i].total_fuel_in_litres)
-                console.log(amounts)
+                const fineAmount = monthlyLabel.map(i=>vehicleTotals[i].total_fine_amount)
+                const odoReading = monthlyLabel.map(i=>vehicleTotals[i].total_odo_reading/100)
+                /////////////////////////////////////////////////////////////////////////////////
                 chart1(monthlyLabel)
                 chart2(monthlyLabel)
+                //////////////////////////////////////////////////////////////////////////////////////
               }else{
                 const today = new Date(); // Current date
                 const startOfYear = new Date(today.getFullYear(), 0, 1);
@@ -489,27 +593,48 @@
                 });
                 const vehicleTotals = {};
                 let yearlyLabel=[]
+                ////////////////////////////////////////////////////////////////////////
                 filteredData.forEach(entry => {
                     const vehicleNo = entry.vehicle_no;
                     const amount = entry.amount;
+                    const odo = entry.current_odometer_reading;
                     const fuelInLitres = entry.fuel_in_litres;
 
                     if (!vehicleTotals[vehicleNo]) {
                         yearlyLabel.push(vehicleNo)
                         vehicleTotals[vehicleNo] = {
+                            total_fine_amount:0,
+                            total_odo_reading:odo,
                             total_amount: amount,
                             total_fuel_in_litres: fuelInLitres,
                         };
                     } else {
                         vehicleTotals[vehicleNo].total_amount += amount;
+                        vehicleTotals[vehicleNo].total_odo_reading += odo;
                         vehicleTotals[vehicleNo].total_fuel_in_litres += fuelInLitres;
                     }
                 });
+                ///////////////////////////////////////////////////////////////////////
+                const filteredData1 = data1.filter(item=>{
+                  const itemDate = new Date(item.fine_date); // Assuming 'date' is a property in your data
+                  return itemDate >= startOfYear && itemDate <= endOfYear;
+                })
+                filteredData1.forEach(entry => {
+                  const vehicleNo = entry.vehicle_no;
+                  const fine_amount = entry.fine_amount;
+                  if (vehicleTotals[vehicleNo]) {
+                  vehicleTotals[vehicleNo].total_fine_amount += fine_amount;
+                  }
+                });
+                /////////////////////////////////////////////////////////////////////
                 const amounts = yearlyLabel.map(i=>vehicleTotals[i].total_amount);
                 const fuels = yearlyLabel.map(i=>vehicleTotals[i].total_fuel_in_litres)
-                console.log(amounts)
+                const fineAmount = yearlyLabel.map(i=>vehicleTotals[i].total_fine_amount)
+                const odoReading = yearlyLabel.map(i=>vehicleTotals[i].total_odo_reading/100)
+                //////////////////////////////////////////////////////////////////////////
                 chart1(yearlyLabel)
                 chart2(yearlyLabel)
+                ///////////////////////////////////////////////////////////////////////////////
               }
         });
 
@@ -540,25 +665,48 @@
                   })
                   const vehicleTotals = {};
                 let yearlyLabel=[]
+                //////////////////////////////////////////////////////////////////////////////////
                 filteredData.forEach(entry => {
                     const vehicleNo = entry.vehicle_no;
                     const amount = entry.amount;
+                    const odo = entry.current_odometer_reading;
                     const fuelInLitres = entry.fuel_in_litres;
 
                     if (!vehicleTotals[vehicleNo]) {
                         yearlyLabel.push(vehicleNo)
                         vehicleTotals[vehicleNo] = {
+                            total_fine_amount:0,
+                            total_odo_reading:odo,
                             total_amount: amount,
                             total_fuel_in_litres: fuelInLitres,
                         };
                     } else {
                         vehicleTotals[vehicleNo].total_amount += amount;
+                        vehicleTotals[vehicleNo].total_odo_reading += odo;
                         vehicleTotals[vehicleNo].total_fuel_in_litres += fuelInLitres;
                     }
                 });
+         //////////////////////////////////////////////////////////////////////////////////////////////////////////
+                const filteredData1 = data1.filter(item=>{
+                  const itemDate = item.fine_date; 
+                  return (
+                    itemDate >= selectedStartDate && itemDate <= selectedEndDate
+                  );
+                })
+                filteredData1.forEach(entry => {
+                  const vehicleNo = entry.vehicle_no;
+                  const fine_amount = entry.fine_amount;
+                  console.log("fine",fine_amount)
+                  if (vehicleTotals[vehicleNo]) {
+                  vehicleTotals[vehicleNo].total_fine_amount += fine_amount;
+                  }
+                });
+                //////////////////////////////////////////////////////////////////////////////////
                 const amounts = yearlyLabel.map(i=>vehicleTotals[i].total_amount);
                 const fuels = yearlyLabel.map(i=>vehicleTotals[i].total_fuel_in_litres)
-                console.log(filteredData)
+                const fineAmount = yearlyLabel.map(i=>vehicleTotals[i].total_fine_amount)
+                const odoReading = yearlyLabel.map(i=>vehicleTotals[i].total_odo_reading/100)
+         //////////////////////////////////////////////////////////////////////////////////////////////
                chart1(yearlyLabel)
                chart2(yearlyLabel)
                 }
