@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "field:vehicle_no",
+ "autoname": "naming_series:",
  "creation": "2023-10-13 11:13:41.267818",
  "default_view": "List",
  "doctype": "DocType",
@@ -9,6 +9,7 @@
  "engine": "InnoDB",
  "field_order": [
   "vehicle_details_tab",
+  "naming_series",
   "vehicle_no",
   "model",
   "year",
@@ -83,7 +84,7 @@
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Vehicle Type",
-   "options": "\nTransport\nLogistics"
+   "options": "\nPassenger\nLogistics"
   },
   {
    "fieldname": "column_break_rqw3f",
@@ -245,15 +246,22 @@
    "fieldname": "insurance",
    "fieldtype": "Attach",
    "label": "Insurance"
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "series",
+   "options": "AK-VEH-",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-13 11:13:41.267818",
+ "modified": "2023-10-20 14:10:49.788694",
  "modified_by": "Administrator",
  "module": "test module",
  "name": "Details_Of_Vehicles",
- "naming_rule": "By fieldname",
+ "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [
   {

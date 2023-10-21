@@ -1,3 +1,5 @@
+{% extends "templates/base.html" %}
+{% block content %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,11 +35,16 @@
             right: 10px;
             z-index: 1;
         }
+        .flexChart{
+          display: flex;
+          justify-content: space-between;
+          width: 50%;
+        }
     </style>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light px-5">
+    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light px-5">
         <div class="container-fluid">
                 <a class="navbar-brand" href="#">
                   <img src="https://pbs.twimg.com/profile_images/969651847072854016/O1wofIxB_400x400.jpg" alt="" width="30" height="24" class="d-inline-block align-text-top rounded-circle">
@@ -91,7 +98,7 @@
             </ul>
           </div>
         </div>
-      </nav>
+      </nav> -->
       <div class="dashboard">
         <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
             <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
@@ -102,26 +109,12 @@
             <ul class="nav nav-pills flex-column mb-auto">
               <li class="nav-item">
                 <a href="#" class="nav-link active" aria-current="page">
-                  <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
                   Home
                 </a>
               </li>
               <li>
-                <a href="#" class="nav-link text-white">
-                  <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
-                  Fuel Vs Odometer
-                </a>
-              </li>
-              <li>
-                <a href="#" class="nav-link text-white">
-                  <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
-                  Fuel vs Vehicle
-                </a>
-              </li>
-              <li>
-                <a href="#" class="nav-link text-white">
-                  <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
-                  Amount Vs Vehicle
+                <a href="http://fleet.mgmt:8000/app/vehicle_booking/view/calendar/vehiCV" class="nav-link text-white">
+                 Calender
                 </a>
               </li>
             </ul>
@@ -133,8 +126,8 @@
                     <div class="card-body">
                       <h5 class="card-title">Total Number Of Vehicle</h5>
                       <p class="card-text">0</p>
-                      <a href="app/details-of-new-vehicles" class="btn btn-primary">List Of Vehicles</a>
-                      <a href="http://127.0.0.1:8000/app/details-of-new-vehicles/new-details-of-new-vehicles-1" class="btn btn-primary">Register New Vehicle</a>
+                      <a href="/app/details_of_vehicles/view/list" class="btn btn-primary">List Of Vehicles</a>
+                      <a href="/app/details_of_vehicles/new-details_of_vehicles-1" class="btn btn-primary">Register New Vehicle</a>
                     </div>
                   </div>
                 </div>
@@ -143,19 +136,28 @@
                     <div class="card-body">
                       <h5 class="card-title">Total Number Of Driver</h5>
                       <p class="card-text">0</p>
-                      <a href="app/details-of-new-driver" class="btn btn-primary">List Of Driver</a>
-                      <a href="http://127.0.0.1:8000/app/details-of-new-driver/new-details-of-new-driver-1" class="btn btn-primary">Register New Driver</a>
+                      <a href="app/details_of_driver/view/list" class="btn btn-primary">List Of Driver</a>
+                      <a href="app/details_of_driver/new-details_of_driver-1" class="btn btn-primary">Register New Driver</a>
                     </div>
                   </div>
                 </div>
               </div>
               <div id="value">
-                {% set doc = frappe.get_all('fuel', fields=['vehicle_no','amount','fuel_in_litres','date']) %}
+                {% set doc = frappe.get_all('Fuel_Logs', fields=['vehicle_no','amount','fuel_in_litres','date','current_odometer_reading']) %}
+                
                 {% for item in doc %}
                     {% set formatted_date = item.date.strftime('%Y-%m-%d') %}
                     {% set doc = item.update({'date': formatted_date}) %}
                 {% endfor %}
                 {{doc}}
+            </div>
+            <div id="value1" style="display: none;">
+              {% set doc1 = frappe.get_all('Fine_details', fields=['vehicle_no','fine_date','fine_amount']) %}
+              {% for item in doc1 %}
+                {% set formatteddate = item.fine_date.strftime('%Y-%m-%d') %}
+                {% set doc1 = item.update({'fine_date': formatteddate}) %}
+              {% endfor %}
+             {{doc1}}
             </div>
             <div id="chart">
                <div id="filter-container">
@@ -170,62 +172,52 @@
                 <input type="date" id="end-date" style="display: none;">
                 <button id="filter" style="display: none;">Filter</button>
             </div>
-              <canvas id="myChart" width="400" height="300"></canvas>
+            <div class="flexChart">
+              <canvas id="myChart" width="400px" height="300px"></canvas>
+              <canvas id="myChart1" width="400px" height="300px"></canvas>
+            </div>
             </div>
         </div>
       </div>
       <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
       <script>
-         const value = document.getElementById('value').innerText;
-        const arrayString = value.trim();
-        const correctedJsonString = arrayString.replace(/'/g, '"');
-        console.log(correctedJsonString)
-        const data = JSON.parse(correctedJsonString)
-        console.log(data)
-        let myChart
-        const filterOption = document.getElementById('filter-option');
-        const startDate = document.getElementById('start-date');
-        const endDate = document.getElementById('end-date');
-        const filterButton = document.getElementById('filter');
-        console.log(startDate,endDate)
-        
-            filterOption.value = "week"
-
-             const today = new Date(); // Current date
-                const oneWeekAgo = new Date(today);
-                oneWeekAgo.setDate(today.getDate() - 7);
-                const filteredData = data.filter(item => {
-                  const itemDate = new Date(item.date); // Assuming 'date' is a property in your data
-                  return itemDate >= oneWeekAgo && itemDate <= today;
-                });
-                console.log(filteredData)
-                const vehicleTotals = {};
-                let weeklyLabel=[]
-                filteredData.forEach(entry => {
-                    const vehicleNo = entry.vehicle_no;
-                    const amount = entry.amount;
-                    const fuelInLitres = entry.fuel_in_litres;
-
-                    if (!vehicleTotals[vehicleNo]) {
-                        weeklyLabel.push(vehicleNo)
-                        vehicleTotals[vehicleNo] = {
-                            total_amount: amount,
-                            total_fuel_in_litres: fuelInLitres,
-                        };
-                    } else {
-                        vehicleTotals[vehicleNo].total_amount += amount;
-                        vehicleTotals[vehicleNo].total_fuel_in_litres += fuelInLitres;
+        function chart2(label){
+          const ctx1 = document.getElementById('myChart1').getContext('2d');
+                    // Create the bar chart
+                  myChart1 = new Chart(ctx1, {
+                    type: 'bar', 
+                    data: {
+                      labels:label, 
+                      datasets: [
+                        {
+                          label: 'Fuel in Litres',
+                          data: amounts, 
+                          backgroundColor: 'gray'
+                        },
+                        {
+                          label: 'Odo in Km',
+                          data: fuels,
+                          backgroundColor: 'black'
+                        }
+                      ]
+                    },
+                    options: {
+                      scales: {
+                        y: {
+                          beginAtZero: true
+                        }
+                      }
                     }
-                });
-                const amounts = weeklyLabel.map(i=>vehicleTotals[i].total_amount);
-                const fuels = weeklyLabel.map(i=>vehicleTotals[i].total_fuel_in_litres)
-                console.log(amounts)
-                const ctx = document.getElementById('myChart').getContext('2d');
+                  });
+
+        }
+        function chart1(label){
+          const ctx = document.getElementById('myChart').getContext('2d');
                     // Create the bar chart
                   myChart = new Chart(ctx, {
                     type: 'bar', 
                     data: {
-                      labels: weeklyLabel, 
+                      labels:label, 
                       datasets: [
                         {
                           label: 'fuel amount',
@@ -247,9 +239,84 @@
                       }
                     }
                   });
+        }
+         const value = document.getElementById('value').innerText;
+        const arrayString = value.trim();
+        const correctedJsonString = arrayString.replace(/'/g, '"');
+        console.log(correctedJsonString)
+        const data = JSON.parse(correctedJsonString)
+        console.log(data)
+        let myChart
+        let myChart1
+        const filterOption = document.getElementById('filter-option');
+        const startDate = document.getElementById('start-date');
+        const endDate = document.getElementById('end-date');
+        const filterButton = document.getElementById('filter');
+        console.log(startDate,endDate)
+        //////////////////////////////////////////////////
+        const value1 = document.getElementById('value1').innerText;
+        const arrayString1 = value1.trim();
+        const correctedJsonString1 = arrayString1.replace(/'/g, '"');
+        console.log(correctedJsonString1)
+        const data1 = JSON.parse(correctedJsonString1)
+        console.log(data1)
+            filterOption.value = "week"
+
+             const today = new Date(); // Current date
+                const oneWeekAgo = new Date(today);
+                oneWeekAgo.setDate(today.getDate() - 7);
+                /////////////////////////////////////////////////////////////////////////////
+                const filteredData = data.filter(item => {
+                  const itemDate = new Date(item.date); // Assuming 'date' is a property in your data
+                  return itemDate >= oneWeekAgo && itemDate <= today;
+                });
+                console.log(filteredData)
+                const vehicleTotals = {};
+                let weeklyLabel=[]
+                filteredData.forEach(entry => {
+                    const vehicleNo = entry.vehicle_no;
+                    const amount = entry.amount;
+                    const odo = entry.current_odometer_reading;
+                    const fuelInLitres = entry.fuel_in_litres;
+
+                    if (!vehicleTotals[vehicleNo]) {
+                        weeklyLabel.push(vehicleNo)
+                        vehicleTotals[vehicleNo] = {
+                            total_fine_amount:0,
+                            total_odo_reading:odo,
+                            total_amount: amount,
+                            total_fuel_in_litres: fuelInLitres,
+                        };
+                    } else {
+                        vehicleTotals[vehicleNo].total_amount += amount;
+                        vehicleTotals[vehicleNo].total_odo_reading += odo;
+                        vehicleTotals[vehicleNo].total_fuel_in_litres += fuelInLitres;
+                    }
+                });
+                ////////////////////////////////////////////////////////////////////////////////////////
+                const filteredData1 = data1.filter(item=>{
+                  const itemDate = new Date(item.date); // Assuming 'date' is a property in your data
+                  return itemDate >= oneWeekAgo && itemDate <= today;
+                })
+                filteredData1.forEach(entry => {
+                  const fine_amount = entry.fine_amount;
+                  vehicleTotals[vehicleNo].total_fine_amount += fine_amount;
+                    
+                });
+                const amounts = weeklyLabel.map(i=>vehicleTotals[i].total_amount);
+                const fuels = weeklyLabel.map(i=>vehicleTotals[i].total_fuel_in_litres)
+                console.log(amounts)
 
 
 
+                chart1(weeklyLabel);
+                chart2(weeklyLabel)
+
+                  
+
+
+
+         
 
 
         filterOption.addEventListener('change', function () {
@@ -267,6 +334,10 @@
               if (myChart) {
                   myChart.destroy();
               }
+              if (myChart1) {
+                  myChart1.destroy();
+              }
+             
               if (selectedFilterOption === 'interval') {
                   const selectedStartDate1= new Date(startDate.value);
                   const year = selectedStartDate1.getFullYear();
@@ -308,33 +379,8 @@
                 const amounts = yearlyLabel.map(i=>vehicleTotals[i].total_amount);
                 const fuels = yearlyLabel.map(i=>vehicleTotals[i].total_fuel_in_litres)
                 console.log(filteredData)
-                const ctx = document.getElementById('myChart').getContext('2d');
-                    // Create the bar chart
-                  myChart = new Chart(ctx, {
-                    type: 'bar', 
-                    data: {
-                      labels: yearlyLabel, 
-                      datasets: [
-                        {
-                          label: 'fuel amount',
-                          data: amounts, 
-                          backgroundColor: 'blue'
-                        },
-                        {
-                          label: 'Fine amount',
-                          data: fuels,
-                          backgroundColor: 'green'
-                        }
-                      ]
-                    },
-                    options: {
-                      scales: {
-                        y: {
-                          beginAtZero: true
-                        }
-                      }
-                    }
-                  });
+               chart1(yearlyLabel)
+               chart2(yearlyLabel)
                 }else if(selectedFilterOption === 'day'){
                 const selectedDate = new Date(); // Replace with your selected date
                 const filteredData = data.filter(item => {
@@ -367,33 +413,8 @@
                 const amounts = dailyLabel.map(i=>vehicleTotals[i].total_amount);
                 const fuels = dailyLabel.map(i=>vehicleTotals[i].total_fuel_in_litres)
                 console.log(amounts)
-                const ctx = document.getElementById('myChart').getContext('2d');
-                    // Create the bar chart
-                   myChart = new Chart(ctx, {
-                    type: 'bar', 
-                    data: {
-                      labels: dailyLabel, 
-                      datasets: [
-                        {
-                          label: 'fuel amount',
-                          data: amounts, 
-                          backgroundColor: 'blue'
-                        },
-                        {
-                          label: 'Fine amount',
-                          data: fuels,
-                          backgroundColor: 'green'
-                        }
-                      ]
-                    },
-                    options: {
-                      scales: {
-                        y: {
-                          beginAtZero: true
-                        }
-                      }
-                    }
-                  });
+               chart1(dailyLabel)
+               chart2(dailyLabel)
                 
               }else if(selectedFilterOption === 'week'){
                 const today = new Date(); // Current date
@@ -425,34 +446,8 @@
                 const amounts = weeklyLabel.map(i=>vehicleTotals[i].total_amount);
                 const fuels = weeklyLabel.map(i=>vehicleTotals[i].total_fuel_in_litres)
                 console.log(amounts)
-                const ctx = document.getElementById('myChart').getContext('2d');
-                    // Create the bar chart
-                  myChart = new Chart(ctx, {
-                    type: 'bar', 
-                    data: {
-                      labels: weeklyLabel, 
-                      datasets: [
-                        {
-                          label: 'fuel amount',
-                          data: amounts, 
-                          backgroundColor: 'blue'
-                        },
-                        {
-                          label: 'Fine amount',
-                          data: fuels,
-                          backgroundColor: 'green'
-                        }
-                      ]
-                    },
-                    options: {
-                      scales: {
-                        y: {
-                          beginAtZero: true
-                        }
-                      }
-                    }
-                  });
-      
+               chart1(weeklyLabel)
+               chart2(weeklyLabel)
               }else if(selectedFilterOption === 'month'){
                 const today = new Date(); // Current date
                 const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
@@ -482,33 +477,8 @@
                 const amounts = monthlyLabel.map(i=>vehicleTotals[i].total_amount);
                 const fuels = monthlyLabel.map(i=>vehicleTotals[i].total_fuel_in_litres)
                 console.log(amounts)
-                const ctx = document.getElementById('myChart').getContext('2d');
-                    // Create the bar chart
-                  myChart = new Chart(ctx, {
-                    type: 'bar', 
-                    data: {
-                      labels: monthlyLabel, 
-                      datasets: [
-                        {
-                          label: 'fuel amount',
-                          data: amounts, 
-                          backgroundColor: 'blue'
-                        },
-                        {
-                          label: 'Fine amount',
-                          data: fuels,
-                          backgroundColor: 'green'
-                        }
-                      ]
-                    },
-                    options: {
-                      scales: {
-                        y: {
-                          beginAtZero: true
-                        }
-                      }
-                    }
-                  });
+                chart1(monthlyLabel)
+                chart2(monthlyLabel)
               }else{
                 const today = new Date(); // Current date
                 const startOfYear = new Date(today.getFullYear(), 0, 1);
@@ -538,33 +508,8 @@
                 const amounts = yearlyLabel.map(i=>vehicleTotals[i].total_amount);
                 const fuels = yearlyLabel.map(i=>vehicleTotals[i].total_fuel_in_litres)
                 console.log(amounts)
-                const ctx = document.getElementById('myChart').getContext('2d');
-                    // Create the bar chart
-                  myChart = new Chart(ctx, {
-                    type: 'bar', 
-                    data: {
-                      labels: yearlyLabel, 
-                      datasets: [
-                        {
-                          label: 'fuel amount',
-                          data: amounts, 
-                          backgroundColor: 'blue'
-                        },
-                        {
-                          label: 'Fine amount',
-                          data: fuels,
-                          backgroundColor: 'green'
-                        }
-                      ]
-                    },
-                    options: {
-                      scales: {
-                        y: {
-                          beginAtZero: true
-                        }
-                      }
-                    }
-                  });
+                chart1(yearlyLabel)
+                chart2(yearlyLabel)
               }
         });
 
@@ -614,33 +559,8 @@
                 const amounts = yearlyLabel.map(i=>vehicleTotals[i].total_amount);
                 const fuels = yearlyLabel.map(i=>vehicleTotals[i].total_fuel_in_litres)
                 console.log(filteredData)
-                const ctx = document.getElementById('myChart').getContext('2d');
-                    // Create the bar chart
-                  myChart = new Chart(ctx, {
-                    type: 'bar', 
-                    data: {
-                      labels: yearlyLabel, 
-                      datasets: [
-                        {
-                          label: 'fuel amount',
-                          data: amounts, 
-                          backgroundColor: 'blue'
-                        },
-                        {
-                          label: 'Fine amount',
-                          data: fuels,
-                          backgroundColor: 'green'
-                        }
-                      ]
-                    },
-                    options: {
-                      scales: {
-                        y: {
-                          beginAtZero: true
-                        }
-                      }
-                    }
-                  });
+               chart1(yearlyLabel)
+               chart2(yearlyLabel)
                 }
           
         });
@@ -650,3 +570,5 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>
+
+{% endblock  %}

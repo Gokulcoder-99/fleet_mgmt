@@ -1,12 +1,14 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "naming_series:",
  "creation": "2023-10-13 11:03:53.524649",
  "default_view": "List",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "naming_series",
   "vehicle_no",
   "driver__name",
   "column_break_koguc",
@@ -25,8 +27,9 @@
   },
   {
    "fieldname": "driver__name",
-   "fieldtype": "Data",
-   "label": "Driver  name"
+   "fieldtype": "Link",
+   "label": "Driver  name",
+   "options": "Details_Of_Driver"
   },
   {
    "fieldname": "column_break_koguc",
@@ -55,14 +58,22 @@
    "fieldname": "odo_reading_end",
    "fieldtype": "Int",
    "label": "Odo Reading End"
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "series",
+   "options": "AK-ODO-",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-13 11:23:48.692389",
+ "modified": "2023-10-20 12:22:12.155221",
  "modified_by": "Administrator",
  "module": "test module",
  "name": "Odometer_Reading",
+ "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [
   {

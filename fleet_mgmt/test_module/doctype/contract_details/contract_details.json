@@ -1,13 +1,14 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "field:vehicle_no",
+ "autoname": "naming_series:",
  "creation": "2023-10-13 10:56:34.351283",
  "default_view": "List",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "naming_series",
   "vehicle_details_tab",
   "vehicle_no",
   "model",
@@ -330,15 +331,22 @@
    "fieldname": "drug_test",
    "fieldtype": "Attach",
    "label": "Drug Test"
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "series",
+   "options": "AK-CNRT-",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-13 10:56:34.351283",
+ "modified": "2023-10-20 12:19:45.559391",
  "modified_by": "Administrator",
  "module": "test module",
  "name": "Contract Details",
- "naming_rule": "By fieldname",
+ "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [
   {

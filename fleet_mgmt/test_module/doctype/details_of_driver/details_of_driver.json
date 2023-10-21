@@ -1,13 +1,14 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "field:emp_id",
+ "autoname": "naming_series:",
  "creation": "2023-10-13 11:12:25.129740",
  "default_view": "List",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "naming_series",
   "emp_id",
   "driver_name",
   "date_of_birth",
@@ -35,12 +36,14 @@
    "unique": 1
   },
   {
+   "fetch_from": "emp_id.employee_name",
    "fieldname": "driver_name",
    "fieldtype": "Data",
    "label": "Driver Name",
    "unique": 1
   },
   {
+   "fetch_from": "emp_id.date_of_birth",
    "fieldname": "date_of_birth",
    "fieldtype": "Date",
    "label": "Date Of Birth"
@@ -105,15 +108,22 @@
    "fieldname": "drug_test",
    "fieldtype": "Attach",
    "label": "Drug Test"
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "series",
+   "options": "AK-DR-",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-13 11:12:25.129740",
+ "modified": "2023-10-20 14:48:04.649680",
  "modified_by": "Administrator",
  "module": "test module",
  "name": "Details_Of_Driver",
- "naming_rule": "By fieldname",
+ "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [
   {

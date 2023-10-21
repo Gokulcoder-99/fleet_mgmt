@@ -1,12 +1,14 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "naming_series:",
  "creation": "2023-10-13 11:05:03.609719",
  "default_view": "List",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "naming_series",
   "vehicle_no",
   "current_odometer_reading",
   "column_break_mlyal",
@@ -73,14 +75,22 @@
    "fieldname": "litre_price",
    "fieldtype": "Int",
    "label": "Litre Price"
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "series",
+   "options": "AK-FUEL-",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-13 11:23:11.592102",
+ "modified": "2023-10-20 11:07:57.898252",
  "modified_by": "Administrator",
  "module": "test module",
  "name": "Fuel_Logs",
+ "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [
   {

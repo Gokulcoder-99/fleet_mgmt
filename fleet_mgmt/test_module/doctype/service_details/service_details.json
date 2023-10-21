@@ -1,0 +1,109 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2023-10-20 12:42:57.815204",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "service_date",
+  "vehicle_no",
+  "mileage_kms",
+  "column_break_reror",
+  "service_provider",
+  "cost",
+  "next_service_date",
+  "service_bill"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "series",
+   "options": "AK-SERV-",
+   "read_only": 1
+  },
+  {
+   "fieldname": "service_date",
+   "fieldtype": "Date",
+   "label": "Service date"
+  },
+  {
+   "fieldname": "vehicle_no",
+   "fieldtype": "Link",
+   "label": "Vehicle No.",
+   "options": "Details_Of_Vehicles"
+  },
+  {
+   "description": "Odometer reading at the time of giving to Service",
+   "fieldname": "mileage_kms",
+   "fieldtype": "Int",
+   "label": "Mileage (kms)"
+  },
+  {
+   "fieldname": "service_provider",
+   "fieldtype": "Data",
+   "label": "Service Provider"
+  },
+  {
+   "fieldname": "cost",
+   "fieldtype": "Currency",
+   "label": "Cost"
+  },
+  {
+   "fieldname": "next_service_date",
+   "fieldtype": "Date",
+   "label": "Next Service date"
+  },
+  {
+   "fieldname": "column_break_reror",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "(Attach the Service Bill Copy)",
+   "fieldname": "service_bill",
+   "fieldtype": "Attach",
+   "label": "Service Bill"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-10-20 19:46:24.571300",
+ "modified_by": "Administrator",
+ "module": "test module",
+ "name": "Service_Details",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Fleet Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

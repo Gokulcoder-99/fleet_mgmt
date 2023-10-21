@@ -215,3 +215,15 @@ app_license = "MIT"
 # auth_hooks = [
 #	"fleet_mgmt.auth.validate"
 # ]
+
+# from frappe import _
+
+# custom_app_login_url = "/dashboard"  # Set the custom login route
+
+# def get_website_user_context(context):
+#     # Redirect Fleet Manager role to the custom portal page
+#     if "Fleet Manager" in frappe.get_roles(frappe.session.user):
+#         frappe.local.flags.redirect_location = custom_app_login_url
+
+
+# get_website_user_context()        

@@ -19,7 +19,8 @@
    "fieldname": "naming_series",
    "fieldtype": "Select",
    "label": "series",
-   "options": "AK-ECH-"
+   "options": "AK-ECH-",
+   "read_only": 1
   },
   {
    "fieldname": "license_plate_number",
@@ -39,7 +40,7 @@
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Vehicle Type",
-   "options": "\nCar\nTruck\nBus\nCrane"
+   "options": "\nTruck\nBus\nJCB"
   },
   {
    "fieldname": "vehicle_category",
@@ -51,7 +52,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-16 11:06:19.078851",
+ "modified": "2023-10-20 12:27:01.967877",
  "modified_by": "Administrator",
  "module": "test module",
  "name": "EICHER_",

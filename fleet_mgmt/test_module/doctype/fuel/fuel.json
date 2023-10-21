@@ -82,12 +82,13 @@
    "fieldname": "naming_series",
    "fieldtype": "Select",
    "label": "series",
-   "options": "FL-"
+   "options": "AK-FL-",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-19 15:07:18.350272",
+ "modified": "2023-10-20 11:21:05.123750",
  "modified_by": "Administrator",
  "module": "test module",
  "name": "fuel",

@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "naming_series:",
  "creation": "2023-10-13 11:07:11.273687",
  "default_view": "List",
  "doctype": "DocType",
@@ -8,8 +9,9 @@
  "engine": "InnoDB",
  "field_order": [
   "driver_details_tab",
-  "driver_name",
+  "naming_series",
   "employee_id",
+  "driver_name",
   "column_break_wufiy",
   "mobile_no",
   "driving_license_no",
@@ -32,6 +34,7 @@
   "location",
   "section_break_cqnnj",
   "brief_description_of_the_fine",
+  "fine_amount",
   "section_break_9rmxm",
   "police_report_number",
   "column_break_0sbil",
@@ -44,23 +47,23 @@
    "label": "Driver Details"
   },
   {
+   "fetch_from": "employee_id.driver_name",
    "fieldname": "driver_name",
-   "fieldtype": "Link",
-   "label": "Driver Name",
-   "options": "Details_Of_Driver"
+   "fieldtype": "Data",
+   "label": "Driver Name"
   },
   {
    "fetch_from": "driver_name.emp_id",
    "fieldname": "employee_id",
-   "fieldtype": "Data",
-   "label": "Employee ID"
+   "fieldtype": "Link",
+   "label": "Employee ID",
+   "options": "Details_Of_Driver"
   },
   {
    "fieldname": "column_break_wufiy",
    "fieldtype": "Column Break"
   },
   {
-   "fetch_from": "driver_name.mobile_no",
    "fieldname": "mobile_no",
    "fieldtype": "Phone",
    "label": "Mobile No."
@@ -118,7 +121,7 @@
    "fieldname": "vehicle_type",
    "fieldtype": "Select",
    "label": "Vehicle Type",
-   "options": "\nTransport\nLogistic"
+   "options": "\nPassenger\nLogistic"
   },
   {
    "fieldname": "section_break_wjfrj",
@@ -188,6 +191,18 @@
    "fieldname": "contact_information_for_witnesses",
    "fieldtype": "Attach",
    "label": "Fine Bill"
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "series",
+   "options": "AK-FINE-",
+   "read_only": 1
+  },
+  {
+   "fieldname": "fine_amount",
+   "fieldtype": "Currency",
+   "label": "Fine Amount"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -197,10 +212,11 @@
    "link_fieldname": "emp_id"
   }
  ],
- "modified": "2023-10-13 11:20:51.061952",
+ "modified": "2023-10-20 20:03:29.856279",
  "modified_by": "Administrator",
  "module": "test module",
  "name": "Fine_details",
+ "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [
   {

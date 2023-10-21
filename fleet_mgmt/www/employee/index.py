@@ -1,7 +1,7 @@
 # import frappe;
 
-# # user = frappe.session.user
+# user = frappe.get_roles(frappe.session.user)
 
 
 
-# user = gokul27
+

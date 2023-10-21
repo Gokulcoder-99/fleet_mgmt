@@ -19,7 +19,8 @@
    "fieldname": "naming_series",
    "fieldtype": "Select",
    "label": "series",
-   "options": "AK-FOR-"
+   "options": "AK-FOR-",
+   "read_only": 1
   },
   {
    "fieldname": "license_plate_number",
@@ -39,7 +40,7 @@
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Vehicle Type",
-   "options": "\nCar\nVan\nBus\nCrane"
+   "options": "\nCar\nVan\nBus"
   },
   {
    "fieldname": "vehicle_category",
@@ -51,7 +52,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-16 11:04:15.320754",
+ "modified": "2023-10-20 12:25:18.980450",
  "modified_by": "Administrator",
  "module": "test module",
  "name": "FORCE_",
