@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .tracker {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+        h1 {
+            text-align: center;
+        }
+        .request {
+            display: flex;
+            align-items: center;
+            margin: 10px;
+        }
+        .status {
+            width: 100px;
+            text-align: center;
+        }
+        .progress-bar {
+            width: 600px;
+            background-color: #f2f2f2;
+            height: 10px;
+            border: 1px solid #000;
+        }
+        .progress {
+            height: 10px;
+            background-color: #4caf50;
+        }
+    </style>
+</head>
+<body>
+    <h1>Track Your Requests</h1>
+    <div class="tracker">
+        {% set cal1 = frappe.get_all('Travel Route', fields=['status', 'reqstatus']) %}
+        {% for item in cal1 %}
+        <div class="request">
+            <div class="status">{{ item.reqstatus }}</div>
+            <div class="nodisplay" style="display: none;">{{ item.status }}</div>
+            <div class="progress-bar">
+                <div class="progress" style="width: 0;"></div>
+            </div>
+            <div class="statusText">Pending</div>
+        </div>
+        {% endfor %}
+        {% set cal2 = frappe.get_all('book your ride', fields=['status', 'reqstatus']) %}
+        {% for item in cal2 %}
+        <div class="request">
+            <div class="status">{{ item.reqstatus }}</div>
+            <div class="nodisplay" style="display: none;">{{ item.status }}</div>
+            <div class="progress-bar">
+                <div class="progress" style="width: 0;"></div>
+            </div>
+            <div class="statusText">Pending</div>
+        </div>
+        {% endfor %}
+        {% set cal2 = frappe.get_all('Travel Route temp', fields=['status', 'reqstatus']) %}
+        {% for item in cal2 %}
+        <div class="request">
+            <div class="status">{{ item.reqstatus }}</div>
+            <div class="nodisplay" style="display: none;">{{ item.status }}</div>
+            <div class="progress-bar">
+                <div class="progress" style="width: 0;"></div>
+            </div>
+            <div class="statusText">Pending</div>
+        </div>
+        {% endfor %}
+    </div>
+    <script>
+        const requests = document.querySelectorAll(".request");
+
+        requests.forEach((request) => {
+            const progressBar = request.querySelector(".progress");
+            const statusText = request.querySelector(".statusText");
+
+            const statusValue = request.querySelector(".nodisplay").textContent.trim();
+            if (statusValue === "Pending") {
+                progressBar.style.width = "50%";
+            } else if (statusValue === "Approved") {
+                progressBar.style.width = "100%";
+                statusText.textContent = "Completed";
+            }
+        });
+    </script>
+</body>
+</html>
+
+

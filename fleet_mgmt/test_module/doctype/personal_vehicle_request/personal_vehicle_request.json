@@ -1,55 +1,33 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "naming_series:",
+ "autoname": "format:{employee_id}-{start_date_and_time}-{end_date_and_time}",
  "creation": "2023-10-20 15:12:10.113428",
  "default_view": "List",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "naming_series",
   "employee_id",
-  "employee_name",
-  "vehicle_type",
-  "request_date",
+  "no_of_people",
+  "start_date_and_time",
+  "end_date_and_time",
   "column_break_ercmr",
   "purpose",
   "from",
   "to",
-  "rental_days",
-  "approval_status"
+  "approval_status",
+  "vehicle",
+  "driver_emp_id",
+  "driver_name",
+  "emplo"
  ],
  "fields": [
-  {
-   "fieldname": "naming_series",
-   "fieldtype": "Select",
-   "label": "series",
-   "options": "AK-PVREQ-",
-   "read_only": 1
-  },
   {
    "fieldname": "employee_id",
    "fieldtype": "Link",
    "label": "Employee ID",
    "options": "Employee"
-  },
-  {
-   "fetch_from": "employee_id.employee_name",
-   "fieldname": "employee_name",
-   "fieldtype": "Data",
-   "label": "Employee Name"
-  },
-  {
-   "fieldname": "vehicle_type",
-   "fieldtype": "Select",
-   "label": "Vehicle Type",
-   "options": "\nHatchback\nSedan\nSUV\nMUV"
-  },
-  {
-   "fieldname": "request_date",
-   "fieldtype": "Datetime",
-   "label": "Request Date & time "
   },
   {
    "fieldname": "column_break_ercmr",
@@ -66,29 +44,67 @@
    "label": "To"
   },
   {
-   "fieldname": "rental_days",
-   "fieldtype": "Int",
-   "label": "Rental Days"
-  },
-  {
    "fieldname": "approval_status",
    "fieldtype": "Select",
    "label": "Approval Status",
-   "options": "\nOpen\nApproved\nRejected"
+   "options": "\nOpen\nApproved\nRejected",
+   "permlevel": 1
   },
   {
    "fieldname": "purpose",
    "fieldtype": "Data",
    "label": "Purpose"
+  },
+  {
+   "fieldname": "start_date_and_time",
+   "fieldtype": "Datetime",
+   "label": "Start Date & time "
+  },
+  {
+   "fieldname": "end_date_and_time",
+   "fieldtype": "Datetime",
+   "label": "End Date & time "
+  },
+  {
+   "fieldname": "vehicle",
+   "fieldtype": "Link",
+   "label": "Vehicle ",
+   "options": "Details_Of_Vehicles",
+   "permlevel": 1
+  },
+  {
+   "fieldname": "no_of_people",
+   "fieldtype": "Int",
+   "label": "No of people"
+  },
+  {
+   "fieldname": "driver_emp_id",
+   "fieldtype": "Link",
+   "label": "Driver Emp ID",
+   "options": "Details_Of_Driver",
+   "permlevel": 1
+  },
+  {
+   "fetch_from": "driver_emp_id.driver_name",
+   "fieldname": "driver_name",
+   "fieldtype": "Data",
+   "label": "Driver Name",
+   "permlevel": 1
+  },
+  {
+   "fieldname": "emplo",
+   "fieldtype": "Table",
+   "label": "emplo",
+   "options": "emp"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-20 19:10:32.282918",
+ "modified": "2023-10-28 23:36:42.995845",
  "modified_by": "Administrator",
  "module": "test module",
  "name": "Personal_Vehicle_Request",
- "naming_rule": "By \"Naming Series\" field",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {
@@ -108,6 +124,29 @@
    "delete": 1,
    "email": 1,
    "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Fleet Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Inbox User",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "permlevel": 1,
    "print": 1,
    "read": 1,
    "report": 1,

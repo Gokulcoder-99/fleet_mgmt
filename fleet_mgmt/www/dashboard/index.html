@@ -4,6 +4,10 @@
 <html>
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.css">
+
+
+    
     <style>
        .dashboard{
           display: flex;
@@ -40,66 +44,20 @@
           justify-content: space-between;
           width: 50%;
         }
+        #calendar{
+          width: 70vw;
+          height: 90vh;
+        }
+        
     </style>
 </head>
 
 <body>
-    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light px-5">
-        <div class="container-fluid">
-                <a class="navbar-brand" href="#">
-                  <img src="https://pbs.twimg.com/profile_images/969651847072854016/O1wofIxB_400x400.jpg" alt="" width="30" height="24" class="d-inline-block align-text-top rounded-circle">
-                  Fleet Management
-                </a>
-              </div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse float-right" id="navbarNavDropdown">
-            <ul class="navbar-nav">
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Fleet
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <li><a class="dropdown-item" href="app/new-contract-details">Contract</a></li>
-                  <li><a class="dropdown-item" href="#">Services</a></li>
-                </ul>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Reporting
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <li><a class="dropdown-item" href="app/accident-details">Accident log</a></li>
-                  <li><a class="dropdown-item" href="app/fuel-log">Fuel log</a></li>
-                  <li><a class="dropdown-item" href="app/odometer-readings">Odometer log</a></li>
-                  <li><a class="dropdown-item" href="app/fine-details">Fines log</a></li>
-                </ul>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Configuration
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <li><a class="dropdown-item" href="manufacture">Manufactures</a></li>
-                </ul>
-              </li>
-              <li>
-                <div class="dropdown">
-                  <a href="#" class="d-flex align-items-center  text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="" alt="" width="32" height="32" class="rounded-circle me-2">
-                    <strong>Fleet admin</strong>
-                  </a>
-                  <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-                    <li><a class="dropdown-item" href="/">Sign out</a></li>
-                  </ul>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav> -->
+       <!--////////////////////////////////////////////////////////////DashBoard//////////////////////////////////////////////////////////////////////////-->
       <div class="dashboard">
+
+
+         <!--////////////////////////////////////////////////////////SideBar//////////////////////////////////////////////////////////////////////////////-->
         <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
             <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
               <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
@@ -108,24 +66,29 @@
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
               <li class="nav-item">
-                <a href="#" class="nav-link active" aria-current="page">
+                <a href="/" class="nav-link text-white active" aria-current="page">
                   Home
                 </a>
               </li>
-              <li>
-                <a href="http://fleet.mgmt:8000/app/vehicle_booking/view/calendar/vehiCV" class="nav-link text-white">
+              <li id="calendarDisplay" >
+                <a href="#" class="nav-link text-white">
                  Calender
                 </a>
               </li>
             </ul>
           </div>
-        <div class="main p-2">
+           <!--//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+        <div class="main p-2" id="dash-display">
+           <!--////////////////////////////////////////////////////////Main display//////////////////////////////////////////////////////////////////////////////-->
             <div class="row">
                 <div class="col-sm-6">
                   <div class="card cardwidth">
                     <div class="card-body">
                       <h5 class="card-title">Total Number Of Vehicle</h5>
-                      <p class="card-text">0</p>
+                      <p class="card-text">
+                        {% set doc = frappe.get_all('Details_Of_Vehicles', fields=['vehicle_no']) %}  
+                        {{ doc|length }}
+                      </p>
                       <a href="/app/details_of_vehicles/view/list" class="btn btn-primary">List Of Vehicles</a>
                       <a href="/app/details_of_vehicles/new-details_of_vehicles-1" class="btn btn-primary">Register New Vehicle</a>
                     </div>
@@ -135,13 +98,17 @@
                   <div class="card cardwidth">
                     <div class="card-body">
                       <h5 class="card-title">Total Number Of Driver</h5>
-                      <p class="card-text">0</p>
+                      <p class="card-text">
+                        {% set doc = frappe.get_all('Details_Of_Driver', fields=['emp_id']) %}  
+                        {{ doc|length }}
+                      </p>
                       <a href="app/details_of_driver/view/list" class="btn btn-primary">List Of Driver</a>
                       <a href="app/details_of_driver/new-details_of_driver-1" class="btn btn-primary">Register New Driver</a>
                     </div>
                   </div>
                 </div>
               </div>
+               <!--/////////////////////////////////////////////////////Data from back end/////////////////////////////////////////////////////////////////////////////////-->
               <div id="value">
                 {% set doc = frappe.get_all('Fuel_Logs', fields=['vehicle_no','amount','fuel_in_litres','date','current_odometer_reading']) %}
                 
@@ -159,6 +126,22 @@
               {% endfor %}
              {{doc1}}
             </div>
+            <div id="calendarValue" style="display: none;">
+              <div id="personalReq" style="display: none;">
+                {% set cal1 = frappe.get_all('Personal_Vehicle_Request', fields=['start_date_and_time','end_date_and_time','from','to','vehicle']) %}
+                {% for item in cal1 %}
+                  {% set formattedstartdate = item.start_date_and_time.strftime('%Y-%m-%dT%H:%M:%S') %}
+                  {% set formattedenddate = item.end_date_and_time.strftime('%Y-%m-%dT%H:%M:%S') %}
+                  {% set cal1 = item.update({'start_date_and_time': formattedstartdate}) %}
+                  {% set cal1 = item.update({'end_date_and_time': formattedenddate}) %}
+                {% endfor %}
+                {{cal1}}
+              </div>
+              {% set cal1 = frappe.get_all('Travel Route') %}
+                 {{call}}
+            </div>
+            
+             <!--//////////////////////////////////////////////////////chart display////////////////////////////////////////////////////////////////////////////////-->
             <div id="chart">
                <div id="filter-container">
                 <select id="filter-option">
@@ -179,8 +162,12 @@
             </div>
         </div>
       </div>
+       <!--//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+        <!--////////////////////////////////////////////////////Script starts//////////////////////////////////////////////////////////////////////////////////-->
+      <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
       <script>
+        //////////////////chart build function////////////////////////////////////////////////////////////////
         function chart2(label){
           const ctx1 = document.getElementById('myChart1').getContext('2d');
                     // Create the bar chart
@@ -240,11 +227,8 @@
                     }
                   });
         }
-         const value = document.getElementById('value').innerText;
-        const arrayString = value.trim();
-        const correctedJsonString = arrayString.replace(/'/g, '"');
-        console.log(correctedJsonString)
-        const data = JSON.parse(correctedJsonString)
+         const value = document.getElementById('value').innerText.trim().replace(/'/g, '"');
+        const data = JSON.parse(value)
         console.log(data)
         let myChart
         let myChart1
@@ -254,18 +238,17 @@
         const filterButton = document.getElementById('filter');
         console.log(startDate,endDate)
         //////////////////////////////////////////////////
-        const value1 = document.getElementById('value1').innerText;
-        const arrayString1 = value1.trim();
-        const correctedJsonString1 = arrayString1.replace(/'/g, '"');
-        console.log(correctedJsonString1)
-        const data1 = JSON.parse(correctedJsonString1)
+        const value1 = document.getElementById('value1').innerText.trim().replace(/'/g, '"');
+        const data1 = JSON.parse(value1)
         console.log(data1)
+
+        ////////////////////////////////default opition/////////////////////////////////////////////////////////////////
             filterOption.value = "week"
 
              const today = new Date(); // Current date
                 const oneWeekAgo = new Date(today);
                 oneWeekAgo.setDate(today.getDate() - 7);
-                /////////////////////////////////////////////////////////////////////////////
+                /////////////////////////data manipulation/////////////////////////////
                 const filteredData = data.filter(item => {
                   const itemDate = new Date(item.date); // Assuming 'date' is a property in your data
                   return itemDate >= oneWeekAgo && itemDate <= today;
@@ -322,7 +305,7 @@
 
 
          
-
+////////////onChange function chart update////////////////////////////
 
         filterOption.addEventListener('change', function () {
             if (filterOption.value === 'interval') {
@@ -342,7 +325,7 @@
               if (myChart1) {
                   myChart1.destroy();
               }
-             
+             //////////////////////////////interval chart////////////////////////////////////////////////////////////
               if (selectedFilterOption === 'interval') {
                   const selectedStartDate1= new Date(startDate.value);
                   const year = selectedStartDate1.getFullYear();
@@ -365,7 +348,7 @@
                   );
                   })
                   const vehicleTotals = {};
-                let yearlyLabel=[]
+                let intervalLabel=[]
                 filteredData.forEach(entry => {
                   const vehicleNo = entry.vehicle_no;
                     const amount = entry.amount;
@@ -373,7 +356,7 @@
                     const fuelInLitres = entry.fuel_in_litres;
 
                     if (!vehicleTotals[vehicleNo]) {
-                        yearlyLabel.push(vehicleNo)
+                      intervalLabel.push(vehicleNo)
                         vehicleTotals[vehicleNo] = {
                             total_fine_amount:0,
                             total_odo_reading:odo,
@@ -404,15 +387,15 @@
 
 
                 ///////////////////////////////////////////////////////////////////////
-                const amounts = yearlyLabel.map(i=>vehicleTotals[i].total_amount);
-                const fuels = yearlyLabel.map(i=>vehicleTotals[i].total_fuel_in_litres)
-                const fineAmount = yearlyLabel.map(i=>vehicleTotals[i].total_fine_amount)
-                const odoReading = yearlyLabel.map(i=>vehicleTotals[i].total_odo_reading/100)
+                const amounts = intervalLabel.map(i=>vehicleTotals[i].total_amount);
+                const fuels = intervalLabel.map(i=>vehicleTotals[i].total_fuel_in_litres)
+                const fineAmount = intervalLabel.map(i=>vehicleTotals[i].total_fine_amount)
+                const odoReading = intervalLabel.map(i=>vehicleTotals[i].total_odo_reading/100)
                 ////////////////////////////////////////////////////////////////////////
 
-               chart1(yearlyLabel)
-               chart2(yearlyLabel)
-               //////////////////////////////////////////////////////////////////////
+               chart1(intervalLabel)
+               chart2(intervalLabel)
+               /////////////////////////////////// DAY  ///////////////////////////////////
                 }else if(selectedFilterOption === 'day'){
                 const selectedDate = new Date(); // Replace with your selected date
                 const filteredData = data.filter(item => {
@@ -472,7 +455,7 @@
               //////////////////////////////////////////////////////////////////////
                chart1(dailyLabel)
                chart2(dailyLabel)
-                
+              ///////////////////////     WEEK        /////////////////////
               }else if(selectedFilterOption === 'week'){
                 const today = new Date(); // Current date
                 const oneWeekAgo = new Date(today);
@@ -528,7 +511,7 @@
 
                chart1(weeklyLabel)
                chart2(weeklyLabel)
-               ///////////////////////////////////////////////////////////////////
+               ////////////////////////////    MONTHLY  ///////////////////////////////////////
               }else if(selectedFilterOption === 'month'){
                 const today = new Date(); // Current date
                 const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
@@ -582,7 +565,7 @@
                 /////////////////////////////////////////////////////////////////////////////////
                 chart1(monthlyLabel)
                 chart2(monthlyLabel)
-                //////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////  YEARLY Chart////////////////////////////////////////////////////
               }else{
                 const today = new Date(); // Current date
                 const startOfYear = new Date(today.getFullYear(), 0, 1);
@@ -638,19 +621,21 @@
               }
         });
 
+ ///////////////////////////onClick chart update////////////////////////////////////////////       
         filterButton.addEventListener('click', function () {
           const selectedFilterOption = filterOption.value;
               if (myChart) {
                   myChart.destroy();
+              }
+              if(myChart1){
+                myChart1.destroy();
               }
               if (selectedFilterOption === 'interval') {
                   const selectedStartDate1= new Date(startDate.value);
                   const year = selectedStartDate1.getFullYear();
                   const month = (selectedStartDate1.getMonth() + 1).toString().padStart(2, '0'); // Month is zero-based
                   const day = selectedStartDate1.getDate().toString().padStart(2, '0');
-
-                  const selectedStartDate = `${year}-${month}-${day}`;
-                  console.log(selectedStartDate)
+                  const selectedStartDate = `${year}-${month}-${day}`
                   const selectedEndDate1 = new Date(endDate.value);
                   const yearend = selectedEndDate1.getFullYear();
                   const monthend = (selectedEndDate1.getMonth() + 1).toString().padStart(2, '0'); // Month is zero-based
@@ -664,7 +649,7 @@
                   );
                   })
                   const vehicleTotals = {};
-                let yearlyLabel=[]
+                let intervalLabel=[]
                 //////////////////////////////////////////////////////////////////////////////////
                 filteredData.forEach(entry => {
                     const vehicleNo = entry.vehicle_no;
@@ -673,7 +658,7 @@
                     const fuelInLitres = entry.fuel_in_litres;
 
                     if (!vehicleTotals[vehicleNo]) {
-                        yearlyLabel.push(vehicleNo)
+                      intervalLabel.push(vehicleNo)
                         vehicleTotals[vehicleNo] = {
                             total_fine_amount:0,
                             total_odo_reading:odo,
@@ -702,17 +687,80 @@
                   }
                 });
                 //////////////////////////////////////////////////////////////////////////////////
-                const amounts = yearlyLabel.map(i=>vehicleTotals[i].total_amount);
-                const fuels = yearlyLabel.map(i=>vehicleTotals[i].total_fuel_in_litres)
-                const fineAmount = yearlyLabel.map(i=>vehicleTotals[i].total_fine_amount)
-                const odoReading = yearlyLabel.map(i=>vehicleTotals[i].total_odo_reading/100)
+                const amounts = intervalLabel.map(i=>vehicleTotals[i].total_amount);
+                const fuels = intervalLabel.map(i=>vehicleTotals[i].total_fuel_in_litres)
+                const fineAmount = intervalLabel.map(i=>vehicleTotals[i].total_fine_amount)
+                const odoReading = intervalLabel.map(i=>vehicleTotals[i].total_odo_reading/100)
          //////////////////////////////////////////////////////////////////////////////////////////////
-               chart1(yearlyLabel)
-               chart2(yearlyLabel)
+               chart1(intervalLabel)
+               chart2(intervalLabel)
                 }
           
         });
        
+////////////////////////////////////////calender//////////////////////////////////////////////////////////////////////////////////
+   //const calValue = document.getElementById('calendarValue').innerText.trim().replace(/'/g, '"')
+  // const calData = JSON.parse(calValue)
+   const calValue1 = document.getElementById('personalReq').innerText.trim().replace(/'/g, '"')
+   const calData1 = JSON.parse(calValue1)
+   console.log(calData1)
+   const calendarDisplay = document.getElementById('calendarDisplay');
+   const dashDisplay = document.getElementById('dash-display')
+   const homeItem = document.querySelector('li.nav-item a[aria-current="page"]');
+   calendarDisplay.addEventListener('click',()=>{
+    homeItem.classList.remove('active');
+      calendarDisplay.innerHTML='<a href="/" class="nav-link active" aria-current="page">Calendar</a>'
+        dashDisplay.innerHTML = '<div id="calendar"></div>';
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: 'timeGridWeek', // Set the initial view to weekly
+          
+            events: [
+                {
+                    title: 'Event 1',
+                    start: '2023-10-24T08:00:00',
+                    end: '2023-10-24T10:00:00'
+                },
+                {
+                    title: 'Event 2',
+                    start: '2023-10-25T12:00:00',
+                    end: '2023-10-25T14:00:00'
+                },
+                {
+                    title: 'Event 2',
+                    start: '2023-10-25T12:00:00',
+                    end: '2023-10-25T14:00:00'
+                }
+                // Add more events here
+            ],
+        eventClick: function (info) {
+            alert(info.event._def.title)
+        },
+        displayEventTime:false,
+    });
+    calendar.render();
+
+  for(let data of calData1){
+    const startDate = data.start_date_and_time;
+    const endDate = data.end_date_and_time;
+    let time=[];
+    let startTime = startDate.split('T')[1];
+    let endTime = endDate.split('T')[1]
+    const addTitle = data.vehicle+'-'+data.from+'-'+data.to+'-'+startTime+' To '+endTime
+    calendar.addEvent({
+    title: addTitle,
+    start: startDate,
+    end:endDate
+});
+
+calendar.refetchEvents();
+  }
+ 
+
+
+   })
+
+
       </script>
       
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

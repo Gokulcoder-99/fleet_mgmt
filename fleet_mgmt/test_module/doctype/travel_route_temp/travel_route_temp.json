@@ -1,0 +1,123 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:emp_id",
+ "creation": "2023-10-30 15:15:53.978128",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "emp_id",
+  "naming_series",
+  "route_id",
+  "pickup_point",
+  "drop_point",
+  "qr_generator",
+  "generated_qr",
+  "status",
+  "start_date",
+  "end_date",
+  "reqstatus"
+ ],
+ "fields": [
+  {
+   "fieldname": "emp_id",
+   "fieldtype": "Link",
+   "label": "Emp ID",
+   "options": "Employee",
+   "unique": 1
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "series",
+   "options": "AK_TR-",
+   "print_hide": 1
+  },
+  {
+   "fieldname": "route_id",
+   "fieldtype": "Select",
+   "label": "Route ID",
+   "options": "\nAK01-TARAMANI - THAIYUR\nAK02-THAIYUR-GUDVANCHERRY",
+   "print_hide": 1
+  },
+  {
+   "fieldname": "pickup_point",
+   "fieldtype": "Data",
+   "label": "Pickup Point",
+   "print_hide": 1
+  },
+  {
+   "fieldname": "drop_point",
+   "fieldtype": "Select",
+   "label": "Drop Point",
+   "options": "\nRF\nOpen Work Space-1(Thaiyur)\nOpen Word Space-2",
+   "print_hide": 1
+  },
+  {
+   "fieldname": "qr_generator",
+   "fieldtype": "Attach Image",
+   "hidden": 1,
+   "label": "QR generator"
+  },
+  {
+   "depends_on": "qr_generator",
+   "fieldname": "generated_qr",
+   "fieldtype": "Image",
+   "label": "Generated QR",
+   "options": "qr_generator"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Status",
+   "options": "Pending\nApproved\nRejected",
+   "read_only": 1
+  },
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "label": "Start Date"
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "label": "End Date"
+  },
+  {
+   "default": "Temp Request",
+   "fieldname": "reqstatus",
+   "fieldtype": "Data",
+   "label": "reqstatus"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-10-30 17:56:06.665853",
+ "modified_by": "Administrator",
+ "module": "test module",
+ "name": "Travel Route temp",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

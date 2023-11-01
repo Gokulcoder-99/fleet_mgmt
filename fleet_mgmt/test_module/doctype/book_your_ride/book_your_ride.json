@@ -1,0 +1,128 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:emp_id",
+ "creation": "2023-10-28 18:19:37.035779",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "emp_id",
+  "request_type",
+  "series",
+  "purpose",
+  "start_date_and_time",
+  "from",
+  "to",
+  "from_address",
+  "to_address",
+  "address",
+  "status",
+  "reqstatus"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "SNo",
+   "options": "AK-BKT-"
+  },
+  {
+   "fieldname": "request_type",
+   "fieldtype": "Select",
+   "label": " Request Type",
+   "options": "Passenger Vehicles\nCrane\nGoods Vehicles"
+  },
+  {
+   "fieldname": "series",
+   "fieldtype": "Data",
+   "label": "Series"
+  },
+  {
+   "fieldname": "purpose",
+   "fieldtype": "Data",
+   "label": "Purpose"
+  },
+  {
+   "fieldname": "from",
+   "fieldtype": "Data",
+   "label": "From "
+  },
+  {
+   "fieldname": "to",
+   "fieldtype": "Data",
+   "label": "To"
+  },
+  {
+   "fieldname": "start_date_and_time",
+   "fieldtype": "Datetime",
+   "label": "Start Date and Time"
+  },
+  {
+   "fieldname": "from_address",
+   "fieldtype": "Data",
+   "label": "From address"
+  },
+  {
+   "fieldname": "to_address",
+   "fieldtype": "Data",
+   "label": "To address"
+  },
+  {
+   "fieldname": "address",
+   "fieldtype": "Table",
+   "label": "Address",
+   "options": "byv child"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Status",
+   "options": "Pending\nApproved\nRejected",
+   "read_only": 1
+  },
+  {
+   "fieldname": "emp_id",
+   "fieldtype": "Link",
+   "label": "Emp ID",
+   "options": "Employee",
+   "unique": 1
+  },
+  {
+   "default": "Book Ride",
+   "fieldname": "reqstatus",
+   "fieldtype": "Data",
+   "label": "reqstatus"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-10-30 17:01:49.168959",
+ "modified_by": "Administrator",
+ "module": "test module",
+ "name": "book your ride",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

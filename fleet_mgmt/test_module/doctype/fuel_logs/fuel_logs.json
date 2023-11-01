@@ -14,6 +14,7 @@
   "column_break_mlyal",
   "amount",
   "receipt_copy",
+  "current_odo_reading",
   "supplier_section",
   "supplier_name",
   "date",
@@ -82,11 +83,16 @@
    "label": "series",
    "options": "AK-FUEL-",
    "read_only": 1
+  },
+  {
+   "fieldname": "current_odo_reading",
+   "fieldtype": "Attach Image",
+   "label": "Current Odometer reading"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-20 11:07:57.898252",
+ "modified": "2023-10-31 22:15:07.705694",
  "modified_by": "Administrator",
  "module": "test module",
  "name": "Fuel_Logs",

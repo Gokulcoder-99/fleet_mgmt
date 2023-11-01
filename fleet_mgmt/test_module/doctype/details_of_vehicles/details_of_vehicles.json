@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "naming_series:",
+ "autoname": "field:vehicle_no",
  "creation": "2023-10-13 11:13:41.267818",
  "default_view": "List",
  "doctype": "DocType",
@@ -9,7 +9,6 @@
  "engine": "InnoDB",
  "field_order": [
   "vehicle_details_tab",
-  "naming_series",
   "vehicle_no",
   "model",
   "year",
@@ -29,6 +28,7 @@
   "column_break_xz1im",
   "purchase_invoice",
   "bill_of_sale",
+  "vehice_images",
   "insurance_details_tab",
   "policy_number",
   "policy_type",
@@ -91,7 +91,7 @@
    "fieldtype": "Column Break"
   },
   {
-   "depends_on": "eval:doc.vehicle_type == \"Transport\"",
+   "depends_on": "eval:doc.vehicle_type == \"Passenger\"",
    "fieldname": "seating_capacity",
    "fieldtype": "Int",
    "label": "Seating Capacity"
@@ -248,20 +248,18 @@
    "label": "Insurance"
   },
   {
-   "fieldname": "naming_series",
-   "fieldtype": "Select",
-   "label": "series",
-   "options": "AK-VEH-",
-   "read_only": 1
+   "fieldname": "vehice_images",
+   "fieldtype": "Attach Image",
+   "label": "Vehice Images"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-20 14:10:49.788694",
+ "modified": "2023-10-31 22:11:33.434862",
  "modified_by": "Administrator",
  "module": "test module",
  "name": "Details_Of_Vehicles",
- "naming_rule": "By \"Naming Series\" field",
+ "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {
@@ -287,6 +285,15 @@
    "role": "Fleet Manager",
    "share": 1,
    "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Inbox User",
+   "share": 1
   }
  ],
  "sort_field": "modified",

@@ -5,160 +5,184 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href='https://fonts.googleapis.com/css?family=Anton' rel='stylesheet'>
+    <script>
+		window.frappe = {};
+		frappe.ready_events = [];
+		frappe.ready = function(fn) {
+			frappe.ready_events.push(fn);
+		}
+		window.dev_server = 1;
+		window.socketio_port = 9000;
+		window.show_language_picker = false;
+	</script>
     <style>
     *{
     margin:0;
     padding:0;
     box-sizing:border-box;
     }
-    body{
-    background: url(https://trumpwallpapers.com/wp-content/uploads/Rocket-Wallpaper-05-1400-x-788.jpg) no-repeat center center fixed;
-    background-size: cover;
-    
-    }
-    #typing-text{
-        text-align: center;
-        font-size: 90px;
-    }
-
-    #cursor {
-        animation: blink 0.7s infinite;
-    }
-
-    @keyframes blink {
-        0%, 100% {
-            opacity: 1;
-        }
-        50% {
-            opacity: 0;
-        }
-    }
-    
-    .slide-out {
-        display: flex;
-        align-items: center;
-        width:100vw;
-        height:100vh;
-        background:url(https://www.esa.int/var/esa/storage/images/esa_multimedia/images/2021/09/webb_flies_ariane_animation/23449186-6-eng-GB/Webb_flies_Ariane_animation_pillars.gif) no-repeat center center fixed;;
-        background-size: cover;
-        animation: slideOut 0.5s forwards;
-        animation-delay: 8s;
-    }
-
-    @keyframes slideOut {
-        to {
-            transform: translateX(-100%);
-            opacity: 0;
-        }
-    }
-
+ .nav{
+    height: 40px;
+    background-color: aqua;
+}
 
     .container{
         display: flex;
-        flex-direction: column;
-        justify-content: center;
         min-width:340px;
-        width: 100vw;
-        height: 100vh;
-        position: relative;
-        transform: 1s;
+        width: 100%;
+        height: 95vh;
     }
     h1{
-    margin-left:5%;
-    color:white;
+        font-size: 50px;
+    }
+    p{
+        font-size: 30px;
     }
     .btn{
         margin-top: 30px;
-        margin-left:5%;
     }
-    a{
-    color: yellow;
+    .bt1{
+        display: inline-block;
+    color: black;
     text-decoration: none;
     background-color:transparent;
     border-radius:10px;
     padding: 10px;
-    border: 1px solid wheat;
+    border: 1px solid;
     position: relative;
     transition: 1s;
     }
-    a::before{
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: black;
-        transition: 1s;
-        transform: rotateX(90deg);
-        z-index: -1;
-    }
-    a::after{
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: black;
-        transition: 1s;
-        transform: rotateY(90deg);
-        z-index: -1;
-    }
-    a:hover::before{
+
+    .bt1:hover::before{
         transform: rotateX(0deg);
     }
-    a:hover::after{
+    .bt1:hover::after{
         transform: rotateY(0deg);
     }
-    a:hover{
-        color: white;
-        box-shadow: 0 0 10px white;
+    .bt1:hover{
+        background-color:rgb(132, 205, 152) ;
+        box-shadow: 0 0 10px greenyellow;
     }
+    .main{
+        flex-basis: 50%;
+        padding-left: 20px;
+        padding-top: 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .banner{
+        flex-basis: 50%;
+       
+    }
+    img{
+        width: 100%;
+        height:100%;
+    } 
+    @media (max-width: 768px) {
+        /* CSS rules for screens up to 768px wide */
+        .container {
+            flex-direction: column;
+        }
+        .main {
+            flex-basis: 100%;
+            padding: 20px;
+        }
+        .banner {
+            flex-basis: 100%;
+        }
+        .bt1{
+        color: black;
+        text-decoration: none;
+        background-color:transparent;
+        border-radius:3px;
+        padding:5px;
+        border: 1px solid;
+        position: relative;
+        transition: 1s;
+    }
+    }
+
+    @media (max-width: 680px) {
+        /* CSS rules for screens up to 480px wide */
+        h1 {
+            font-size: 30px;
+        }
+        p {
+            font-size: 20px;
+        }
+        .bt1{
+            display: block;
+            margin: 10px;
+        }
+        /* Add more styles for smaller screens as needed */
+    }
+
     </style>
 </head>
 
 <body>
-    <div id="element-to-remove" class="slide-out">
-        <h1 id="typing-text">
-            <span id="typed-text"></span>
-            <span id="cursor">|</span>
-        </h1>
-    </div>
+    <!-- <div class="nav">
+     <ul>
+          <li>
+            <a href="#">
+            <span class="user-image-wrapper"></span>
+            </a>
+            <ul>
+               <li> <a href="/me" >My Account</a></li>
+               <li><a  href="/?cmd=web_logout">Log out</a></li>
+                <a href="/app">Switch To Desk</a>
+            </ul>
+          </li>
+            <li class="nav-item">
+            <a class="nav-link btn-login-area" href="/login">Login</a>
+            </li>
+     </ul>
+    </div> -->
     <div class="container">
+        <div class="main">
+        <div>
         <h1>Make Your Ride Comfortable <br>With Our Service </h1>
+        <p>May your jounery free <br>from stress and bring you home safely</p>
         <div class="btn">
-            <a href="http://127.0.0.1:8000/app/request-form/new-request-form-1" >Book Your Ride</a>
-            <a href="http://127.0.0.1:8000/app/personal-vehicle-req/new-personal-vehicle-req-1" style="margin-left: 30px;">Personal Ride</a>
+            <a id="travelRouteLink"  href="http://127.0.0.1:8000/travel-route/new" class="bt1" >Travel Route</a>
+            <a href="http://127.0.0.1:8000/book-your-ride/new" class="bt1">Book Your Ride</a>
+            <a href="http://127.0.0.1:8000/group-ride/new" class="bt1">Group Ride</a>
+            <a href="http://127.0.0.1:8000/request_tracker" class="bt1">Track Your Request</a>
         </div>
+    </div>
+    </div>
+    <div class="banner">
+        <img src="https://i.postimg.cc/T3b28DJ1/banner-image-fl.png" alt="banner">
+    </div>
       </div>
-     
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const textElement = document.getElementById('typed-text');
-            const text = "WELCOME TO AGNIKUL";
-
-            let index = 0;
-            let delay = 300; 
-
-            function typeText() {
-                 if (index < text.length) {
-                    textElement.innerHTML += text.charAt(index);
-                    index++;
-                    setTimeout(typeText, delay);
-                }
-            }
-
-            typeText();
-            const elementToRemove = document.getElementById('element-to-remove');
-            
-            elementToRemove.addEventListener('animationend', () => {
-                elementToRemove.remove();
-            });
-        });
+      <div id="req" style="display: none;">
+        {% set cal1 = frappe.get_all('Travel Route',fields=['qr_generator','status']) %}
+        {{cal1}}
+      </div>
+     	<script>
+            frappe.boot = {'sysdefaults': {'float_precision': 3, 'date_format': 'dd-mm-yyyy', 'time_format': 'HH:mm:ss'}, 'time_zone': {'system': 'Asia/Kolkata', 'user': 'Asia/Kolkata'}}
+            // for backward compatibility of some libs
+            frappe.sys_defaults = frappe.boot.sysdefaults;
+        </script>
+        <script type="text/javascript" src="/assets/frappe/dist/js/frappe-web.bundle.ZTJNSQRM.js"></script>
         
-    </script>
+        <script type="text/javascript" src="/website_script.js"></script>
+        <script type="text/javascript" src="/assets/erpnext/dist/js/erpnext-web.bundle.5YR4TMQD.js"></script>
+        <script>frappe.csrf_token = "{{frappe.session.csrf_token}}";</script></body>
 </body>
+   <script>
+    let data="{{cal1}}".trim().replace(/'/g, '"')
+    if(data!="[]"){
+    let value = JSON.parse(data)
+    let imageLinkExists = (value[0].qr_generator)
+    let approvedStatus=value[0].status
+    if (imageLinkExists) {
+    travelRouteLink.href = "http://127.0.0.1:8000/qrimage";
+  }
+}
+   </script>
 </html>
 
 

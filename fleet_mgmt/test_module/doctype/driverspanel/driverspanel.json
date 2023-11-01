@@ -1,0 +1,105 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{driver_name}-{start_date_time}-{end_date__time}",
+ "creation": "2023-10-25 11:33:08.637945",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "request_id",
+  "driver_name",
+  "no_of_people",
+  "from",
+  "to",
+  "vehicleno",
+  "column_break_75bu6",
+  "start_date_time",
+  "end_date__time"
+ ],
+ "fields": [
+  {
+   "fieldname": "request_id",
+   "fieldtype": "Link",
+   "label": "Request ID",
+   "options": "Personal_Vehicle_Request"
+  },
+  {
+   "fetch_from": "request_id.driver_name",
+   "fieldname": "driver_name",
+   "fieldtype": "Data",
+   "label": "Driver Name",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "request_id.no_of_people",
+   "fieldname": "no_of_people",
+   "fieldtype": "Data",
+   "label": "No of people",
+   "read_only": 1
+  },
+  {
+   "fieldname": "start_date_time",
+   "fieldtype": "Datetime",
+   "label": "Start Date time "
+  },
+  {
+   "fieldname": "end_date__time",
+   "fieldtype": "Datetime",
+   "label": "End Date  time "
+  },
+  {
+   "fetch_from": "request_id.from",
+   "fieldname": "from",
+   "fieldtype": "Data",
+   "label": "From",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "request_id.to",
+   "fieldname": "to",
+   "fieldtype": "Data",
+   "label": "To",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "request_id.vehicle",
+   "fieldname": "vehicleno",
+   "fieldtype": "Data",
+   "label": "VehicleNo.",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_75bu6",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2023-10-25 19:32:38.522054",
+ "modified_by": "Administrator",
+ "module": "test module",
+ "name": "DriversPanel",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_seen": 1
+}

@@ -24,6 +24,7 @@
   "model",
   "column_break_7bjz2",
   "vehicle_type",
+  "vehicle_image",
   "section_break_wjfrj",
   "rc_details",
   "column_break_iywth",
@@ -203,6 +204,11 @@
    "fieldname": "fine_amount",
    "fieldtype": "Currency",
    "label": "Fine Amount"
+  },
+  {
+   "fieldname": "vehicle_image",
+   "fieldtype": "Attach Image",
+   "label": "Vehicle Image "
   }
  ],
  "index_web_pages_for_search": 1,
@@ -212,7 +218,7 @@
    "link_fieldname": "emp_id"
   }
  ],
- "modified": "2023-10-20 20:03:29.856279",
+ "modified": "2023-10-31 22:19:09.208381",
  "modified_by": "Administrator",
  "module": "test module",
  "name": "Fine_details",

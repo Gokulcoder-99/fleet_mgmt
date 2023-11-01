@@ -10,11 +10,12 @@
  "field_order": [
   "naming_series",
   "vehicle_no",
-  "driver__name",
   "column_break_koguc",
+  "driver__name",
   "date",
   "section_break_h132v",
   "odo_reading_start",
+  "current_odoreading",
   "column_break_k8ci9",
   "odo_reading_end"
  ],
@@ -65,11 +66,16 @@
    "label": "series",
    "options": "AK-ODO-",
    "read_only": 1
+  },
+  {
+   "fieldname": "current_odoreading",
+   "fieldtype": "Attach Image",
+   "label": "Current Odoreading"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-20 12:22:12.155221",
+ "modified": "2023-10-31 22:25:31.526811",
  "modified_by": "Administrator",
  "module": "test module",
  "name": "Odometer_Reading",

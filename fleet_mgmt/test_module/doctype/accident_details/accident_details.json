@@ -8,8 +8,8 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "naming_series",
   "driver_details_tab",
+  "naming_series",
   "driver_name",
   "employee_id",
   "column_break_wufiy",
@@ -24,6 +24,7 @@
   "model",
   "column_break_7bjz2",
   "vehicle_type",
+  "vehicle_images",
   "section_break_wjfrj",
   "rc_details",
   "column_break_iywth",
@@ -211,9 +212,15 @@
   {
    "fieldname": "naming_series",
    "fieldtype": "Select",
+   "hidden": 1,
    "label": "series",
    "options": "AK-ACDT-",
    "read_only": 1
+  },
+  {
+   "fieldname": "vehicle_images",
+   "fieldtype": "Attach Image",
+   "label": "Vehicle Images"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -223,7 +230,7 @@
    "link_fieldname": "emp_id"
   }
  ],
- "modified": "2023-10-20 12:28:41.519432",
+ "modified": "2023-10-31 22:13:20.012073",
  "modified_by": "Administrator",
  "module": "test module",
  "name": "Accident_Details",
